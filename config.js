@@ -5,5 +5,6 @@ var requirejs = {
       daterangepicker : "js/lib/daterangepicker",
       text : "bower_components/text/text",      
       underscore : "bower_components/underscore/underscore", 
-    }
+    },
+    wrap: true
 };
