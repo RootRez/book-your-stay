@@ -1,4 +1,4 @@
-require(["jquery", "js/app", "moment", "daterangepicker"], function($, app, moment, daterangepicker){
+require(["jquery", "js/app", "daterangepicker"], function($, app, daterangepicker){
     'use strict';
 
 
