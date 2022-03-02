@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "node node_modules/requirejs/bin/r.js -o embed.build.js",
-    "scss": "node-sass resources/scss -o dist",
+    "scss": "sass resources/scss/style.scss dist/style.css",
     "prefix": "node node_modules/postcss --use autoprefixer -b 'last 5 versions' dist/style.css -o dist/style.css",
     "styles": "npm run scss & npm run prefix",
     "prod": "npm run scss & npm run prefix & npm run build"
@@ -14,7 +14,7 @@
   "license": "ISC",
   "dependencies": {
     "autoprefixer": "^9.6.1",
-    "node-sass": "^4.12.0",
+    "sass": "^1.49.8",
     "postcss": "^7.0.18",
     "postcss-cli": "^6.1.3",
     "requirejs": "^2.3.6"
