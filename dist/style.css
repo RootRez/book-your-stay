@@ -2,17 +2,20 @@
   max-width: 800px;
   margin: 0 auto;
   padding: 10px;
-  word-wrap: normal; }
+  word-wrap: normal;
+}
 
 #widget-title {
   padding: 0 10px;
   margin: 5px;
-  text-align: center; }
+  text-align: center;
+}
 
 #widget-tagline {
   padding: 0 10px;
   margin: 5px;
-  text-align: center; }
+  text-align: center;
+}
 
 .rootrez_widget_form_wrapper {
   max-width: 520px;
@@ -21,29 +24,41 @@
   border: var(--form-border);
   box-shadow: var(--box-shadow);
   margin: 0 auto;
-  color: var(--book-color); }
-  @media (min-width: 600px) {
-    .rootrez_widget_form_wrapper {
-      border-radius: var(--border-radius); } }
-  .rootrez_widget_form_wrapper.has-deals {
-    max-width: 800px; }
-  @media (max-width: 599px) {
-    .rootrez_widget_form_wrapper.no-deals #rootrez-widget-form .search_dates {
-      border-right: 1px solid var(--border-color); } }
+  color: var(--book-color);
+}
+@media (min-width: 600px) {
+  .rootrez_widget_form_wrapper {
+    border-radius: var(--border-radius);
+  }
+}
+.rootrez_widget_form_wrapper.has-deals {
+  max-width: 800px;
+}
+@media (max-width: 599px) {
+  .rootrez_widget_form_wrapper.no-deals #rootrez-widget-form .search_dates {
+    border-right: 1px solid var(--border-color);
+  }
+}
+.rootrez_widget_form_wrapper.no-deals #rootrez-widget-form .search_occupancy {
+  flex-basis: 35%;
+  max-width: 35%;
+}
+@media (max-width: 599px) {
   .rootrez_widget_form_wrapper.no-deals #rootrez-widget-form .search_occupancy {
-    flex-basis: 35%;
-    max-width: 35%; }
-    @media (max-width: 599px) {
-      .rootrez_widget_form_wrapper.no-deals #rootrez-widget-form .search_occupancy {
-        flex: 0 1 50%;
-        max-width: 50%;
-        border-bottom: none; } }
+    flex: 0 1 50%;
+    max-width: 50%;
+    border-bottom: none;
+  }
+}
+.rootrez_widget_form_wrapper.no-deals #rootrez-widget-form .search_submit {
+  flex-basis: 22.5%;
+}
+@media (max-width: 599px) {
   .rootrez_widget_form_wrapper.no-deals #rootrez-widget-form .search_submit {
-    flex-basis: 22.5%; }
-    @media (max-width: 599px) {
-      .rootrez_widget_form_wrapper.no-deals #rootrez-widget-form .search_submit {
-        flex: 0 1 50%;
-        max-width: 50%; } }
+    flex: 0 1 50%;
+    max-width: 50%;
+  }
+}
 
 #rootrez-widget-form {
   display: flex;
@@ -51,219 +66,272 @@
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  margin-bottom: 0; }
-  #rootrez-widget-form > div {
-    box-sizing: border-box; }
+  margin-bottom: 0;
+}
+#rootrez-widget-form > div {
+  box-sizing: border-box;
+}
+#rootrez-widget-form .search_dates {
+  flex: 1 1 35%;
+  border-right: 1px solid var(--border-color);
+  height: 60px;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 16px;
+  font-size: 14px;
+}
+#rootrez-widget-form .search_dates svg {
+  fill: var(--primary-color);
+  width: 18px;
+  height: 18px;
+  margin-right: 8px;
+}
+@media (max-width: 599px) {
   #rootrez-widget-form .search_dates {
-    flex: 1 1 35%;
-    border-right: 1px solid var(--border-color);
-    height: 60px;
-    display: flex;
-    flex-flow: row nowrap;
-    justify-content: flex-start;
-    align-items: center;
-    padding: 16px;
-    font-size: 14px; }
-    #rootrez-widget-form .search_dates svg {
-      fill: var(--primary-color);
-      width: 18px;
-      height: 18px;
-      margin-right: 8px; }
-    @media (max-width: 599px) {
-      #rootrez-widget-form .search_dates {
-        flex-basis: 100%;
-        text-align: center;
-        border-bottom: 1px solid var(--border-color);
-        border-right: none; } }
+    flex-basis: 100%;
+    text-align: center;
+    border-bottom: 1px solid var(--border-color);
+    border-right: none;
+  }
+}
+#rootrez-widget-form .search_promo_code {
+  flex: 0 1 25%;
+  border-right: 1px solid var(--border-color);
+  height: 60px;
+  padding: 16px;
+  display: none;
+  flex-flow: row nowrap;
+  align-items: center;
+  position: relative;
+  max-width: 25%;
+}
+.has-deals #rootrez-widget-form .search_promo_code {
+  display: flex;
+}
+#rootrez-widget-form .search_promo_code.open {
+  z-index: 5;
+}
+@media (max-width: 599px) {
   #rootrez-widget-form .search_promo_code {
-    flex: 0 1 25%;
-    border-right: 1px solid var(--border-color);
-    height: 60px;
-    padding: 16px;
-    display: none;
-    flex-flow: row nowrap;
-    align-items: center;
-    position: relative;
-    max-width: 25%; }
-    .has-deals #rootrez-widget-form .search_promo_code {
-      display: flex; }
-    #rootrez-widget-form .search_promo_code.open {
-      z-index: 5; }
-    @media (max-width: 599px) {
-      #rootrez-widget-form .search_promo_code {
-        flex-basis: 50%;
-        max-width: 50%; } }
-    #rootrez-widget-form .search_promo_code-event {
-      display: flex;
-      justify-content: flex-start;
-      align-items: center;
-      height: 60px;
-      width: 100%; }
-    #rootrez-widget-form .search_promo_code svg {
-      fill: var(--primary-color);
-      width: 20px;
-      height: 20px;
-      margin-right: 8px; }
-    #rootrez-widget-form .search_promo_code select {
-      appearance: none;
-      -webkit-appearance: none;
-      max-width: 80%;
-      border: none; }
-    #rootrez-widget-form .search_promo_code h3 {
-      font-size: 14px;
-      font-weight: normal;
-      margin: 0;
-      display: flex;
-      align-items: center;
-      width: 92%; }
-      #rootrez-widget-form .search_promo_code h3 span {
-        white-space: nowrap;
-        overflow: hidden;
-        display: inline-block;
-        width: 100%;
-        color: var(--book-color);
-        text-shadow: none; }
-    #rootrez-widget-form .search_promo_code .deals-list ul {
-      margin: 0 -8px;
-      padding: 0;
-      list-style: none; }
-      #rootrez-widget-form .search_promo_code .deals-list ul li {
-        font-size: 12px;
-        padding: 5px 8px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        list-style: none;
-        cursor: pointer; }
-        #rootrez-widget-form .search_promo_code .deals-list ul li:hover, #rootrez-widget-form .search_promo_code .deals-list ul li.selected {
-          background: var(--primary-color);
-          color: white; }
-          #rootrez-widget-form .search_promo_code .deals-list ul li:hover svg, #rootrez-widget-form .search_promo_code .deals-list ul li.selected svg {
-            fill: white; }
-        #rootrez-widget-form .search_promo_code .deals-list ul li span.tip {
-          margin-right: 4px;
-          width: 15px; }
-        #rootrez-widget-form .search_promo_code .deals-list ul li svg {
-          width: 12px;
-          height: 12px; }
+    flex-basis: 50%;
+    max-width: 50%;
+  }
+}
+#rootrez-widget-form .search_promo_code-event {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  height: 60px;
+  width: 100%;
+}
+#rootrez-widget-form .search_promo_code svg {
+  fill: var(--primary-color);
+  width: 20px;
+  height: 20px;
+  margin-right: 8px;
+}
+#rootrez-widget-form .search_promo_code select {
+  appearance: none;
+  -webkit-appearance: none;
+  max-width: 80%;
+  border: none;
+}
+#rootrez-widget-form .search_promo_code h3 {
+  font-size: 14px;
+  font-weight: normal;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  width: 92%;
+}
+#rootrez-widget-form .search_promo_code h3 span {
+  white-space: nowrap;
+  overflow: hidden;
+  display: inline-block;
+  width: 100%;
+  color: var(--book-color);
+  text-shadow: none;
+}
+#rootrez-widget-form .search_promo_code .deals-list ul {
+  margin: 0 -8px;
+  padding: 0;
+  list-style: none;
+}
+#rootrez-widget-form .search_promo_code .deals-list ul li {
+  font-size: 12px;
+  padding: 5px 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  list-style: none;
+  cursor: pointer;
+}
+#rootrez-widget-form .search_promo_code .deals-list ul li:hover, #rootrez-widget-form .search_promo_code .deals-list ul li.selected {
+  background: var(--primary-color);
+  color: white;
+}
+#rootrez-widget-form .search_promo_code .deals-list ul li:hover svg, #rootrez-widget-form .search_promo_code .deals-list ul li.selected svg {
+  fill: white;
+}
+#rootrez-widget-form .search_promo_code .deals-list ul li span.tip {
+  margin-right: 4px;
+  width: 15px;
+}
+#rootrez-widget-form .search_promo_code .deals-list ul li svg {
+  width: 12px;
+  height: 12px;
+}
+#rootrez-widget-form .search_occupancy {
+  flex: 0 1 25%;
+  height: 60px;
+  padding: 16px;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  position: relative;
+  max-width: 25%;
+}
+@media (max-width: 599px) {
   #rootrez-widget-form .search_occupancy {
-    flex: 0 1 25%;
-    height: 60px;
-    padding: 16px;
-    display: flex;
-    flex-flow: row nowrap;
-    align-items: center;
-    position: relative;
-    max-width: 25%; }
-    @media (max-width: 599px) {
-      #rootrez-widget-form .search_occupancy {
-        flex-basis: 50%;
-        max-width: 50%; } }
-    #rootrez-widget-form .search_occupancy.open {
-      z-index: 5; }
-    #rootrez-widget-form .search_occupancy-event {
-      display: flex;
-      justify-content: flex-start;
-      align-items: center;
-      height: 60px;
-      width: 100%; }
-    #rootrez-widget-form .search_occupancy h3.guest-total {
-      font-size: 14px;
-      font-weight: normal;
-      margin: 0;
-      display: flex;
-      align-items: center;
-      color: var(--book-color); }
-    #rootrez-widget-form .search_occupancy svg {
-      fill: var(--primary-color);
-      width: 21px;
-      height: 20px;
-      margin-right: 8px; }
-      .counter_wrap #rootrez-widget-form .search_occupancy svg {
-        margin: 0; }
-    #rootrez-widget-form .search_occupancy .counter_wrap svg {
-      margin-right: 1px; }
+    flex-basis: 50%;
+    max-width: 50%;
+  }
+}
+#rootrez-widget-form .search_occupancy.open {
+  z-index: 5;
+}
+#rootrez-widget-form .search_occupancy-event {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  height: 60px;
+  width: 100%;
+}
+#rootrez-widget-form .search_occupancy h3.guest-total {
+  font-size: 14px;
+  font-weight: normal;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  color: var(--book-color);
+}
+#rootrez-widget-form .search_occupancy svg {
+  fill: var(--primary-color);
+  width: 21px;
+  height: 20px;
+  margin-right: 8px;
+}
+.counter_wrap #rootrez-widget-form .search_occupancy svg {
+  margin: 0;
+}
+#rootrez-widget-form .search_occupancy .counter_wrap svg {
+  margin-right: 1px;
+}
+#rootrez-widget-form .search_submit {
+  flex: 0 1 15%;
+  z-index: 1;
+  border-radius: var(--border-radius);
+}
+@media (max-width: 599px) {
   #rootrez-widget-form .search_submit {
-    flex: 0 1 15%;
-    z-index: 1;
-    border-radius: var(--border-radius); }
-    @media (max-width: 599px) {
-      #rootrez-widget-form .search_submit {
-        flex-basis: 100%; } }
-    #rootrez-widget-form .search_submit button {
-      width: 100%;
-      margin: 0;
-      padding: 0;
-      border: none;
-      background-color: var(--primary-color);
-      text-transform: uppercase;
-      color: white;
-      height: 60px;
-      cursor: pointer;
-      font-size: 14px;
-      font-family: var(--book-font);
-      border-radius: 0; }
-      @media (min-width: 600px) {
-        #rootrez-widget-form .search_submit button {
-          border-radius: 0 var(--border-radius) var(--border-radius) 0; } }
-      #rootrez-widget-form .search_submit button:hover {
-        background-color: var(--secondary-color); }
-  #rootrez-widget-form .booking-extras-options {
-    position: absolute;
-    top: 70px;
-    left: -1px;
-    background: white;
-    width: calc(100% - 16px);
-    opacity: 0;
-    transition: all 0.3s ease-in-out;
-    padding: 8px;
-    border: 1px solid var(--border-color);
-    min-width: 140px;
-    z-index: 0; }
-    .open #rootrez-widget-form .booking-extras-options {
-      opacity: 1;
-      top: 60px;
-      z-index: 2; }
-  #rootrez-widget-form .expander {
-    position: absolute;
-    right: 0;
-    background-color: transparent; }
-    #rootrez-widget-form .expander svg {
-      fill: black;
-      width: 10px;
-      height: 6px;
-      transition: transform 0.3s ease;
-      transform-origin: 5px 3px; }
-    .open #rootrez-widget-form .expander svg {
-      transform: rotate(-180deg); }
-  #rootrez-widget-form .search_occupancy.open .expander svg,
-  #rootrez-widget-form .search_promo_code.open .expander svg {
-    transform: rotate(180deg); }
-  #rootrez-widget-form .search_occupancy.open .booking-extras-options,
-  #rootrez-widget-form .search_promo_code.open .booking-extras-options {
-    opacity: 1;
-    top: 60px; }
+    flex-basis: 100%;
+  }
+}
+#rootrez-widget-form .search_submit button {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background-color: var(--primary-color);
+  text-transform: uppercase;
+  color: white;
+  height: 60px;
+  cursor: pointer;
+  font-size: 14px;
+  font-family: var(--book-font);
+  border-radius: 0;
+}
+@media (min-width: 600px) {
+  #rootrez-widget-form .search_submit button {
+    border-radius: 0 var(--border-radius) var(--border-radius) 0;
+  }
+}
+#rootrez-widget-form .search_submit button:hover {
+  background-color: var(--secondary-color);
+}
+#rootrez-widget-form .booking-extras-options {
+  position: absolute;
+  top: 70px;
+  left: -1px;
+  background: white;
+  width: calc(100% - 16px);
+  opacity: 0;
+  transition: all 0.3s ease-in-out;
+  padding: 8px;
+  border: 1px solid var(--border-color);
+  min-width: 140px;
+  z-index: 0;
+  visibility: hidden;
+}
+.open #rootrez-widget-form .booking-extras-options {
+  opacity: 1;
+  top: 60px;
+  z-index: 2;
+  visibility: visible;
+}
+#rootrez-widget-form .expander {
+  position: absolute;
+  right: 0;
+  background-color: transparent;
+}
+#rootrez-widget-form .expander svg {
+  fill: black;
+  width: 10px;
+  height: 6px;
+  transition: transform 0.3s ease;
+  transform-origin: 5px 3px;
+}
+.open #rootrez-widget-form .expander svg {
+  transform: rotate(-180deg);
+}
+#rootrez-widget-form .search_occupancy.open .expander svg,
+#rootrez-widget-form .search_promo_code.open .expander svg {
+  transform: rotate(180deg);
+}
+#rootrez-widget-form .search_occupancy.open .booking-extras-options,
+#rootrez-widget-form .search_promo_code.open .booking-extras-options {
+  opacity: 1;
+  top: 60px;
+  visibility: visible;
+}
 
 .booking-extras-actions {
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-between;
-  margin: 20px 0 0; }
-  .booking-extras-actions a {
-    text-decoration: none;
-    font-size: 12px; }
-  .booking-extras-actions .cancel {
-    color: #aeaeae; }
-  .booking-extras-actions .apply {
-    background-color: var(--primary-color);
-    text-transform: uppercase;
-    padding: 3px 15px;
-    border-radius: var(--border-radius);
-    color: white;
-    font-weight: bolder;
-    transition: 0 0.3s ease-in-out; }
-    .booking-extras-actions .apply:hover {
-      background-color: var(--secondary-color); }
+  margin: 20px 0 0;
+}
+.booking-extras-actions a {
+  text-decoration: none;
+  font-size: 12px;
+}
+.booking-extras-actions .cancel {
+  color: #aeaeae;
+}
+.booking-extras-actions .apply {
+  background-color: var(--primary-color);
+  text-transform: uppercase;
+  padding: 3px 15px;
+  border-radius: var(--border-radius);
+  color: white;
+  font-weight: bolder;
+  transition: 0 0.3s ease-in-out;
+}
+.booking-extras-actions .apply:hover {
+  background-color: var(--secondary-color);
+}
 
 .search_occupancy {
   position: relative;
@@ -277,43 +345,54 @@
   /* Old versions of Firefox */
   -ms-user-select: none;
   /* Internet Explorer/Edge */
-  user-select: none; }
-  .search_occupancy-counter-item {
-    display: flex;
-    align-items: center;
-    flex-flow: row nowrap; }
-    .search_occupancy-counter-item:first-child {
-      padding-bottom: 8px; }
-    .search_occupancy-counter-item label {
-      flex: 0 1 50%;
-      font-family: var(--book-font);
-      font-size: 12px;
-      user-select: none; }
-    .search_occupancy-counter-item input.counter {
-      width: 20px;
-      font-size: 12px;
-      border: none;
-      font-family: var(--book-font);
-      text-align: center;
-      user-select: none;
-      color: var(--book-color);
-      padding: 5px; }
-  .search_occupancy .counter_wrap {
-    flex: 0 1 50%;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    user-select: none; }
-    .search_occupancy .counter_wrap svg {
-      cursor: pointer; }
-  .search_occupancy .guest-total span span {
-    display: inline-block; }
-    .search_occupancy .guest-total span span:before:not(:empty) {
-      content: "( "; }
-    .search_occupancy .guest-total span span:after:not(:empty) {
-      content: " )"; }
-  .search_occupancy svg.m-btn {
-    margin-right: 0; }
+  user-select: none;
+}
+.search_occupancy-counter-item {
+  display: flex;
+  align-items: center;
+  flex-flow: row nowrap;
+}
+.search_occupancy-counter-item:first-child {
+  padding-bottom: 8px;
+}
+.search_occupancy-counter-item label {
+  flex: 0 1 50%;
+  font-family: var(--book-font);
+  font-size: 12px;
+  user-select: none;
+}
+.search_occupancy-counter-item input.counter {
+  width: 20px;
+  font-size: 12px;
+  border: none;
+  font-family: var(--book-font);
+  text-align: center;
+  user-select: none;
+  color: var(--book-color);
+  padding: 5px;
+}
+.search_occupancy .counter_wrap {
+  flex: 0 1 50%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  user-select: none;
+}
+.search_occupancy .counter_wrap svg {
+  cursor: pointer;
+}
+.search_occupancy .guest-total span span {
+  display: inline-block;
+}
+.search_occupancy .guest-total span span:before:not(:empty) {
+  content: "( ";
+}
+.search_occupancy .guest-total span span:after:not(:empty) {
+  content: " )";
+}
+.search_occupancy svg.m-btn {
+  margin-right: 0;
+}
 
 /* line 124, _base/components/_daterangepicker.scss */
 .daterangepicker {
@@ -333,232 +412,295 @@
   font-family: var(--book-font);
   border-radius: 0 0 3px 3px;
   overflow: hidden;
-  /* Calendars */ }
-  @media (max-width: 599px) {
-    .daterangepicker {
-      width: 100%;
-      height: 100%;
-      padding: 0px;
-      margin-top: 0px;
-      transition: all 2.5s cubic-bezier(0, 1, 0.5, 1);
-      position: fixed;
-      top: 0 !important; }
-      .daterangepicker .calendar {
-        width: 100%;
-        max-width: 100%;
-        margin: 0;
-        max-height: 45vh; } }
-  @media (min-width: 600px) {
-    .daterangepicker {
-      width: auto; } }
-  .daterangepicker:before, .daterangepicker:after {
-    position: absolute;
-    display: inline-block;
-    border-bottom-color: rgba(0, 0, 0, 0.2);
-    content: ""; }
-  .daterangepicker:before {
-    top: -7px;
-    border-right: 7px solid transparent;
-    border-left: 7px solid transparent;
-    border-bottom: 7px solid #ececec; }
-  .daterangepicker:after {
-    top: -6px;
-    border-right: 6px solid transparent;
-    border-bottom: 6px solid #fff;
-    border-left: 6px solid transparent; }
-  .daterangepicker.opensright:before {
-    left: 9px; }
-  .daterangepicker.opensright:after {
-    left: 10px; }
-  .daterangepicker.dropup {
-    margin-top: -5px; }
-    .daterangepicker.dropup:before {
-      top: initial;
-      bottom: -7px;
-      border-bottom: initial;
-      border-top: 7px solid #ececec; }
-    .daterangepicker.dropup:after {
-      top: initial;
-      bottom: -6px;
-      border-bottom: initial;
-      border-top: 6px solid #fff; }
-  .daterangepicker.rootrez-dropdown-menu {
-    max-width: none;
-    z-index: 3001; }
-  .daterangepicker.show-calendar.ltr .calendar {
-    display: block; }
-    @media (max-width: 599px) {
-      .daterangepicker.show-calendar.ltr .calendar {
-        max-width: 100% !important;
-        margin: 0 !important; } }
-  .daterangepicker .calendar {
-    display: none;
-    max-width: 48%;
-    margin: 0; }
-    @media (max-width: 599px) {
-      .daterangepicker .calendar {
-        max-width: 100%; } }
-    .daterangepicker .calendar.single .calendar-table {
-      border: none; }
-    .daterangepicker .calendar.right {
-      float: right; }
-      @media (max-width: 599px) {
-        .daterangepicker .calendar.right {
-          float: none !important; } }
-    .daterangepicker .calendar.left {
-      float: left; }
-      @media (max-width: 599px) {
-        .daterangepicker .calendar.left {
-          float: none !important; } }
-    .daterangepicker .calendar th {
-      white-space: nowrap;
-      text-align: center;
-      text-transform: uppercase;
-      min-width: 32px; }
-      .daterangepicker .calendar th.prev {
-        background-repeat: no-repeat;
-        background-position: 35% 8px;
-        background-size: 8px;
-        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='99' height='169' viewBox='0 0 99 169'%3E%3Cpath d='M3.77368421,168.421053 C3.76842105,168.421053 3.75789474,168.421053 3.74736842,168.421053 C2.72105263,168.421053 1.8,167.957895 1.17894737,167.231579 L1.17368421,167.226316 C0.521052632,166.610526 0.110526316,165.736842 0.110526316,164.768421 C0.110526316,163.8 0.521052632,162.926316 1.17368421,162.315789 L1.17368421,162.315789 L89.7368421,84.2105263 L1.45789474,6.10526316 C0.805263158,5.48947368 0.394736842,4.61578947 0.394736842,3.64736842 C0.394736842,2.67894737 0.805263158,1.80526316 1.45789474,1.19473684 L1.45789474,1.19473684 C2.08421053,0.526315789 2.97894737,0.110526316 3.96315789,0.110526316 C4.76842105,0.110526316 5.51052632,0.389473684 6.09473684,0.852631579 L6.08947368,0.847368421 L97.3157895,81.5473684 C98.0421053,82.2105263 98.5,83.1578947 98.5105263,84.2105263 L98.5105263,84.2105263 C98.5105263,84.2157895 98.5105263,84.2263158 98.5105263,84.2368421 C98.5105263,85.2631579 98.0473684,86.1842105 97.3210526,86.8052632 L97.3157895,86.8105263 L6.08947368,167.510526 C5.51052632,168.073684 4.71578947,168.421053 3.84210526,168.421053 C3.82105263,168.421053 3.79473684,168.421053 3.77368421,168.421053 L3.77894737,168.421053 L3.77368421,168.421053 Z' transform='rotate(-180 49.368 84.5)'/%3E%3C/svg%3E%0A"); }
-        .daterangepicker .calendar th.prev svg {
-          display: none; }
-      .daterangepicker .calendar th.next {
-        background-repeat: no-repeat;
-        background-position: 60% 8px;
-        background-size: 8px;
-        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' id='icon-next' viewBox='0 0 19 32' width='100%25' height='100%25'%3E%3Ctitle%3Enext%3C/title%3E%3Cpath d='M0.667 32c-0.001 0-0.003 0-0.005 0-0.195 0-0.37-0.088-0.488-0.226l-0.001-0.001c-0.124-0.117-0.202-0.283-0.202-0.467s0.078-0.35 0.202-0.466l0-0 16.827-14.84-16.773-14.84c-0.124-0.117-0.202-0.283-0.202-0.467s0.078-0.35 0.202-0.466l0-0c0.119-0.127 0.289-0.206 0.476-0.206 0.153 0 0.294 0.053 0.405 0.141l-0.001-0.001 17.333 15.333c0.138 0.126 0.225 0.306 0.227 0.506v0c0 0.001 0 0.003 0 0.005 0 0.195-0.088 0.37-0.226 0.488l-0.001 0.001-17.333 15.333c-0.11 0.107-0.261 0.173-0.427 0.173-0.004 0-0.009-0-0.013-0h0.001z'%3E%3C/path%3E%3C/svg%3E"); }
-        .daterangepicker .calendar th.next svg {
-          display: none; }
-    .daterangepicker .calendar td {
-      white-space: nowrap;
-      text-align: center;
-      text-transform: uppercase;
-      min-width: 32px;
-      font-size: 12px;
-      font-weight: 400;
-      vertical-align: middle; }
-    .daterangepicker .calendar th {
-      font-size: 15px;
-      font-weight: 400; }
-  .daterangepicker .calendar-table {
-    border: 1px solid #fff;
-    padding: 4px;
-    border-radius: 0;
-    background-color: #fff; }
-  .daterangepicker table {
+  /* Calendars */
+}
+@media (max-width: 599px) {
+  .daterangepicker {
     width: 100%;
-    margin: 0; }
-  .daterangepicker td,
-  .daterangepicker th {
-    text-align: center;
-    width: 40px;
-    height: 30px;
-    border-radius: 0;
-    border: 1px solid transparent;
-    white-space: nowrap;
-    cursor: pointer;
-    font-size: 12px; }
-  .daterangepicker td.available svg,
-  .daterangepicker th.available svg {
-    width: 8px;
-    height: 14px;
-    fill: var(--primary-color);
-    vertical-align: middle; }
-  .daterangepicker td.available:hover svg,
-  .daterangepicker th.available:hover svg {
-    fill: black; }
-  .daterangepicker td.week,
-  .daterangepicker th.week {
-    font-size: 80%;
-    color: #ccc; }
-  .daterangepicker td.off {
-    background-color: #fff;
-    border-color: transparent;
-    color: #999; }
-    .daterangepicker td.off.in-range, .daterangepicker td.off.start-date, .daterangepicker td.off.end-date {
-      background-color: #fff;
-      border-color: transparent;
-      color: #999; }
-  .daterangepicker td.in-range {
-    background-color: var(--primary-color);
-    border-color: transparent;
-    color: white;
-    border-radius: 0; }
-  .daterangepicker td.start-date, .daterangepicker td.end-date {
-    border-radius: 0 0 0 0; }
-  .daterangepicker td.start-date.end-date {
-    border-radius: 0; }
-  .daterangepicker td.active {
-    background-color: var(--primary-color);
-    border-color: transparent;
-    color: #fff; }
-    .daterangepicker td.active:hover {
-      background-color: var(--primary-color);
-      border-color: transparent;
-      color: #fff; }
-  .daterangepicker th.month {
-    width: auto; }
-  .daterangepicker td.disabled,
-  .daterangepicker option.disabled {
-    color: #999;
-    cursor: not-allowed;
-    text-decoration: line-through; }
-  .daterangepicker select.monthselect, .daterangepicker select.yearselect {
-    font-size: 12px;
-    padding: 1px;
-    height: auto;
+    height: 100%;
+    padding: 0px;
+    margin-top: 0px;
+    transition: all 2.5s cubic-bezier(0, 1, 0.5, 1);
+    position: fixed;
+    top: 0 !important;
+  }
+  .daterangepicker .calendar {
+    width: 100%;
+    max-width: 100%;
     margin: 0;
-    cursor: default; }
-  .daterangepicker select.monthselect {
-    margin-right: 2%;
-    width: 56%; }
-  .daterangepicker select.yearselect {
-    width: 40%; }
-  .daterangepicker select.hourselect, .daterangepicker select.minuteselect, .daterangepicker select.secondselect, .daterangepicker select.ampmselect {
-    width: 50px;
-    margin-bottom: 0; }
-  .daterangepicker .input-mini {
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    color: #555;
-    height: 30px;
-    line-height: 30px;
-    display: block;
-    vertical-align: middle;
-    margin: 0 0 5px 0;
-    padding: 0 6px 0 28px;
-    width: 100%; }
-    .daterangepicker .input-mini.active {
-      border: 1px solid #08c;
-      border-radius: 4px; }
-  .daterangepicker .daterangepicker_input {
-    display: none;
-    position: relative; }
-    .daterangepicker .daterangepicker_input i {
-      position: absolute;
-      left: 8px;
-      top: 8px; }
-  .daterangepicker.rtl .input-mini {
-    padding-right: 28px;
-    padding-left: 6px; }
-  .daterangepicker.rtl .daterangepicker_input i {
-    left: auto;
-    right: 8px; }
-  .daterangepicker .calendar-time {
-    text-align: center;
-    margin: 5px auto;
-    line-height: 30px;
-    position: relative;
-    padding-left: 28px; }
-    .daterangepicker .calendar-time select.disabled {
-      color: #ccc;
-      cursor: not-allowed; }
+    max-height: 45vh;
+  }
+}
+@media (min-width: 600px) {
+  .daterangepicker {
+    width: auto;
+  }
+}
+.daterangepicker:before, .daterangepicker:after {
+  position: absolute;
+  display: inline-block;
+  border-bottom-color: rgba(0, 0, 0, 0.2);
+  content: "";
+}
+.daterangepicker:before {
+  top: -7px;
+  border-right: 7px solid transparent;
+  border-left: 7px solid transparent;
+  border-bottom: 7px solid #ececec;
+}
+.daterangepicker:after {
+  top: -6px;
+  border-right: 6px solid transparent;
+  border-bottom: 6px solid #fff;
+  border-left: 6px solid transparent;
+}
+.daterangepicker.opensright:before {
+  left: 9px;
+}
+.daterangepicker.opensright:after {
+  left: 10px;
+}
+.daterangepicker.dropup {
+  margin-top: -5px;
+}
+.daterangepicker.dropup:before {
+  top: initial;
+  bottom: -7px;
+  border-bottom: initial;
+  border-top: 7px solid #ececec;
+}
+.daterangepicker.dropup:after {
+  top: initial;
+  bottom: -6px;
+  border-bottom: initial;
+  border-top: 6px solid #fff;
+}
+.daterangepicker.rootrez-dropdown-menu {
+  max-width: none;
+  z-index: 3001;
+}
+.daterangepicker.show-calendar.ltr .calendar {
+  display: block;
+}
+@media (max-width: 599px) {
+  .daterangepicker.show-calendar.ltr .calendar {
+    max-width: 100% !important;
+    margin: 0 !important;
+  }
+}
+.daterangepicker .calendar {
+  display: none;
+  max-width: 48%;
+  margin: 0;
+}
+@media (max-width: 599px) {
+  .daterangepicker .calendar {
+    max-width: 100%;
+  }
+}
+.daterangepicker .calendar.single .calendar-table {
+  border: none;
+}
+.daterangepicker .calendar.right {
+  float: right;
+}
+@media (max-width: 599px) {
+  .daterangepicker .calendar.right {
+    float: none !important;
+  }
+}
+.daterangepicker .calendar.left {
+  float: left;
+}
+@media (max-width: 599px) {
+  .daterangepicker .calendar.left {
+    float: none !important;
+  }
+}
+.daterangepicker .calendar th {
+  white-space: nowrap;
+  text-align: center;
+  text-transform: uppercase;
+  min-width: 32px;
+}
+.daterangepicker .calendar th.prev {
+  background-repeat: no-repeat;
+  background-position: 35% 8px;
+  background-size: 8px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='99' height='169' viewBox='0 0 99 169'%3E%3Cpath d='M3.77368421,168.421053 C3.76842105,168.421053 3.75789474,168.421053 3.74736842,168.421053 C2.72105263,168.421053 1.8,167.957895 1.17894737,167.231579 L1.17368421,167.226316 C0.521052632,166.610526 0.110526316,165.736842 0.110526316,164.768421 C0.110526316,163.8 0.521052632,162.926316 1.17368421,162.315789 L1.17368421,162.315789 L89.7368421,84.2105263 L1.45789474,6.10526316 C0.805263158,5.48947368 0.394736842,4.61578947 0.394736842,3.64736842 C0.394736842,2.67894737 0.805263158,1.80526316 1.45789474,1.19473684 L1.45789474,1.19473684 C2.08421053,0.526315789 2.97894737,0.110526316 3.96315789,0.110526316 C4.76842105,0.110526316 5.51052632,0.389473684 6.09473684,0.852631579 L6.08947368,0.847368421 L97.3157895,81.5473684 C98.0421053,82.2105263 98.5,83.1578947 98.5105263,84.2105263 L98.5105263,84.2105263 C98.5105263,84.2157895 98.5105263,84.2263158 98.5105263,84.2368421 C98.5105263,85.2631579 98.0473684,86.1842105 97.3210526,86.8052632 L97.3157895,86.8105263 L6.08947368,167.510526 C5.51052632,168.073684 4.71578947,168.421053 3.84210526,168.421053 C3.82105263,168.421053 3.79473684,168.421053 3.77368421,168.421053 L3.77894737,168.421053 L3.77368421,168.421053 Z' transform='rotate(-180 49.368 84.5)'/%3E%3C/svg%3E%0A");
+}
+.daterangepicker .calendar th.prev svg {
+  display: none;
+}
+.daterangepicker .calendar th.next {
+  background-repeat: no-repeat;
+  background-position: 60% 8px;
+  background-size: 8px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' id='icon-next' viewBox='0 0 19 32' width='100%25' height='100%25'%3E%3Ctitle%3Enext%3C/title%3E%3Cpath d='M0.667 32c-0.001 0-0.003 0-0.005 0-0.195 0-0.37-0.088-0.488-0.226l-0.001-0.001c-0.124-0.117-0.202-0.283-0.202-0.467s0.078-0.35 0.202-0.466l0-0 16.827-14.84-16.773-14.84c-0.124-0.117-0.202-0.283-0.202-0.467s0.078-0.35 0.202-0.466l0-0c0.119-0.127 0.289-0.206 0.476-0.206 0.153 0 0.294 0.053 0.405 0.141l-0.001-0.001 17.333 15.333c0.138 0.126 0.225 0.306 0.227 0.506v0c0 0.001 0 0.003 0 0.005 0 0.195-0.088 0.37-0.226 0.488l-0.001 0.001-17.333 15.333c-0.11 0.107-0.261 0.173-0.427 0.173-0.004 0-0.009-0-0.013-0h0.001z'%3E%3C/path%3E%3C/svg%3E");
+}
+.daterangepicker .calendar th.next svg {
+  display: none;
+}
+.daterangepicker .calendar td {
+  white-space: nowrap;
+  text-align: center;
+  text-transform: uppercase;
+  min-width: 32px;
+  font-size: 12px;
+  font-weight: 400;
+  vertical-align: middle;
+}
+.daterangepicker .calendar th {
+  font-size: 15px;
+  font-weight: 400;
+}
+.daterangepicker .calendar-table {
+  border: 1px solid #fff;
+  padding: 4px;
+  border-radius: 0;
+  background-color: #fff;
+}
+.daterangepicker table {
+  width: 100%;
+  margin: 0;
+}
+.daterangepicker td,
+.daterangepicker th {
+  text-align: center;
+  width: 40px;
+  height: 30px;
+  border-radius: 0;
+  border: 1px solid transparent;
+  white-space: nowrap;
+  cursor: pointer;
+  font-size: 12px;
+}
+.daterangepicker td.available svg,
+.daterangepicker th.available svg {
+  width: 8px;
+  height: 14px;
+  fill: var(--primary-color);
+  vertical-align: middle;
+}
+.daterangepicker td.available:hover svg,
+.daterangepicker th.available:hover svg {
+  fill: black;
+}
+.daterangepicker td.week,
+.daterangepicker th.week {
+  font-size: 80%;
+  color: #ccc;
+}
+.daterangepicker td.off {
+  background-color: #fff;
+  border-color: transparent;
+  color: #999;
+}
+.daterangepicker td.off.in-range, .daterangepicker td.off.start-date, .daterangepicker td.off.end-date {
+  background-color: #fff;
+  border-color: transparent;
+  color: #999;
+}
+.daterangepicker td.in-range {
+  background-color: var(--primary-color);
+  border-color: transparent;
+  color: white;
+  border-radius: 0;
+}
+.daterangepicker td.start-date, .daterangepicker td.end-date {
+  border-radius: 0 0 0 0;
+}
+.daterangepicker td.start-date.end-date {
+  border-radius: 0;
+}
+.daterangepicker td.active {
+  background-color: var(--primary-color);
+  border-color: transparent;
+  color: #fff;
+}
+.daterangepicker td.active:hover {
+  background-color: var(--primary-color);
+  border-color: transparent;
+  color: #fff;
+}
+.daterangepicker th.month {
+  width: auto;
+}
+.daterangepicker td.disabled,
+.daterangepicker option.disabled {
+  color: #999;
+  cursor: not-allowed;
+  text-decoration: line-through;
+}
+.daterangepicker select.monthselect, .daterangepicker select.yearselect {
+  font-size: 12px;
+  padding: 1px;
+  height: auto;
+  margin: 0;
+  cursor: default;
+}
+.daterangepicker select.monthselect {
+  margin-right: 2%;
+  width: 56%;
+}
+.daterangepicker select.yearselect {
+  width: 40%;
+}
+.daterangepicker select.hourselect, .daterangepicker select.minuteselect, .daterangepicker select.secondselect, .daterangepicker select.ampmselect {
+  width: 50px;
+  margin-bottom: 0;
+}
+.daterangepicker .input-mini {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  color: #555;
+  height: 30px;
+  line-height: 30px;
+  display: block;
+  vertical-align: middle;
+  margin: 0 0 5px 0;
+  padding: 0 6px 0 28px;
+  width: 100%;
+}
+.daterangepicker .input-mini.active {
+  border: 1px solid #08c;
+  border-radius: 4px;
+}
+.daterangepicker .daterangepicker_input {
+  display: none;
+  position: relative;
+}
+.daterangepicker .daterangepicker_input i {
+  position: absolute;
+  left: 8px;
+  top: 8px;
+}
+.daterangepicker.rtl .input-mini {
+  padding-right: 28px;
+  padding-left: 6px;
+}
+.daterangepicker.rtl .daterangepicker_input i {
+  left: auto;
+  right: 8px;
+}
+.daterangepicker .calendar-time {
+  text-align: center;
+  margin: 5px auto;
+  line-height: 30px;
+  position: relative;
+  padding-left: 28px;
+}
+.daterangepicker .calendar-time select.disabled {
+  color: #ccc;
+  cursor: not-allowed;
+}
 
 @media (max-width: 599px) {
   .range_inputs {
     display: flex;
-    justify-content: flex-end; } }
-
+    justify-content: flex-end;
+  }
+}
 .range_inputs a {
   text-align: center;
   flex: 0 1 40%;
@@ -573,25 +715,27 @@
   display: flex;
   justify-content: center;
   align-content: center;
-  margin: 2.5%; }
-
+  margin: 2.5%;
+}
 .range_inputs .applyBtn {
   cursor: pointer;
   float: right;
   background-color: var(--primary-color);
   color: white;
-  border-radius: var(--border-radius); }
-
+  border-radius: var(--border-radius);
+}
 .range_inputs .cancelBtn {
   cursor: pointer;
   color: #aeaeae;
   background-color: transparent;
   float: left;
-  flex-basis: 100px; }
+  flex-basis: 100px;
+}
 
 [tooltip] {
   position: relative;
-  /* opinion 1 */ }
+  /* opinion 1 */
+}
 
 /* Applies to all tooltips */
 [tooltip]::before,
@@ -605,14 +749,16 @@
   pointer-events: none;
   position: absolute;
   display: none;
-  opacity: 0; }
+  opacity: 0;
+}
 
 [tooltip]::before {
   content: "";
   border: 5px solid transparent;
   /* opinion 4 */
   z-index: 1001;
-  /* absurdity 1 */ }
+  /* absurdity 1 */
+}
 
 [tooltip]::after {
   content: attr(tooltip);
@@ -621,9 +767,9 @@
   font-family: var(--book-font);
   text-align: center;
   /* 
-		Let the content set the size of the tooltips 
-		but this will also keep them from being obnoxious
-		*/
+  Let the content set the size of the tooltips 
+  but this will also keep them from being obnoxious
+  */
   min-width: 19rem;
   max-width: 30rem;
   overflow: hidden;
@@ -635,98 +781,117 @@
   color: #fff;
   z-index: 1000;
   /* absurdity 2 */
-  line-height: 1.2; }
+  line-height: 1.2;
+}
 
 /* Make the tooltips respond to hover */
 [tooltip]:hover::before,
 [tooltip]:hover::after {
-  display: block; }
+  display: block;
+}
 
 /* don't show empty tooltips */
 [tooltip=""]::before,
 [tooltip=""]::after {
-  display: none !important; }
+  display: none !important;
+}
 
 /* FLOW: UP */
 [tooltip]:not([flow])::before,
-[tooltip][flow^="up"]::before {
+[tooltip][flow^=up]::before {
   bottom: 100%;
   border-bottom-width: 0;
-  border-top-color: #231f20; }
+  border-top-color: #231f20;
+}
 
 [tooltip]:not([flow])::after,
-[tooltip][flow^="up"]::after {
-  bottom: calc(100% + 5px); }
+[tooltip][flow^=up]::after {
+  bottom: calc(100% + 5px);
+}
 
 [tooltip]:not([flow])::before,
 [tooltip]:not([flow])::after,
-[tooltip][flow^="up"]::before,
-[tooltip][flow^="up"]::after {
+[tooltip][flow^=up]::before,
+[tooltip][flow^=up]::after {
   left: 50%;
-  transform: translate(-50%, -0.5em); }
+  transform: translate(-50%, -0.5em);
+}
 
 /* FLOW: DOWN */
-[tooltip][flow^="down"]::before {
+[tooltip][flow^=down]::before {
   top: 100%;
   border-top-width: 0;
-  border-bottom-color: #231f20; }
+  border-bottom-color: #231f20;
+}
 
-[tooltip][flow^="down"]::after {
-  top: calc(100% + 5px); }
+[tooltip][flow^=down]::after {
+  top: calc(100% + 5px);
+}
 
-[tooltip][flow^="down"]::before,
-[tooltip][flow^="down"]::after {
+[tooltip][flow^=down]::before,
+[tooltip][flow^=down]::after {
   left: 50%;
-  transform: translate(-50%, 0.5em); }
+  transform: translate(-50%, 0.5em);
+}
 
 /* FLOW: LEFT */
-[tooltip][flow^="left"]::before {
+[tooltip][flow^=left]::before {
   top: 50%;
   border-right-width: 0;
   border-left-color: #231f20;
   left: calc(0em - 5px);
-  transform: translate(-0.5em, -50%); }
+  transform: translate(-0.5em, -50%);
+}
 
-[tooltip][flow^="left"]::after {
+[tooltip][flow^=left]::after {
   top: 50%;
   right: calc(100% + 5px);
-  transform: translate(-0.5em, -50%); }
+  transform: translate(-0.5em, -50%);
+}
 
 /* FLOW: RIGHT */
-[tooltip][flow^="right"]::before {
+[tooltip][flow^=right]::before {
   top: 50%;
   border-left-width: 0;
   border-right-color: #231f20;
   right: calc(0em - 5px);
-  transform: translate(0.5em, -50%); }
+  transform: translate(0.5em, -50%);
+}
 
-[tooltip][flow^="right"]::after {
+[tooltip][flow^=right]::after {
   top: 50%;
   left: calc(100% + 5px);
-  transform: translate(0.5em, -50%); }
+  transform: translate(0.5em, -50%);
+}
 
 /* KEYFRAMES */
 @keyframes tooltips-vert {
   to {
     opacity: 0.9;
-    transform: translate(-50%, 0); } }
-
+    transform: translate(-50%, 0);
+  }
+}
 @keyframes tooltips-horz {
   to {
     opacity: 0.9;
-    transform: translate(0, -50%); } }
-
+    transform: translate(0, -50%);
+  }
+}
 /* FX All The Things */
 [tooltip]:not([flow]):hover::before,
 [tooltip]:not([flow]):hover::after,
-[tooltip][flow^="up"]:hover::before,
-[tooltip][flow^="up"]:hover::after,
-[tooltip][flow^="down"]:hover::before,
-[tooltip][flow^="down"]:hover::after {
-  animation: tooltips-vert 300ms ease-out forwards; }
+[tooltip][flow^=up]:hover::before,
+[tooltip][flow^=up]:hover::after,
+[tooltip][flow^=down]:hover::before,
+[tooltip][flow^=down]:hover::after {
+  animation: tooltips-vert 300ms ease-out forwards;
+}
 
-[tooltip][flow^="left"]:hover::before,
-[tooltip][flow^="left"]:hover::after,
-[tooltip][flow^="right"]:hover::before,
-[tooltip][flow^="right"]:hover::after {
-  animation: tooltips-horz 300ms ease-out forwards; }
+[tooltip][flow^=left]:hover::before,
+[tooltip][flow^=left]:hover::after,
+[tooltip][flow^=right]:hover::before,
+[tooltip][flow^=right]:hover::after {
+  animation: tooltips-horz 300ms ease-out forwards;
+}
+
+/*# sourceMappingURL=style.css.map */

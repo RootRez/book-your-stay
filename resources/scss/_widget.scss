@@ -311,11 +311,13 @@
     border: 1px solid var(--border-color);
     min-width: 140px;
     z-index: 0;
+    visibility: hidden;
 
     .open & {
       opacity: 1;
       top: 60px;
       z-index: 2;
+      visibility: visible;
     }
   }
 
@@ -358,6 +360,7 @@
     .booking-extras-options {
       opacity: 1;
       top: 60px;
+      visibility: visible;
     }
   }
 }
