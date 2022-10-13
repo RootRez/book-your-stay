@@ -45,48 +45,14 @@
             }
 
         </style>
-        <script>
-        (function (window, document) {
-            var loader = function () {
-                var title_text = "Book Your Downtown Lodging Here";
-                var tagline_text = "Simply put, nobody knows Salt Lake better, has lower rates or a better selection of incredible hotels and lodging. Search & book with locals.";
-                // var title_text = "";
-                // var tagline_text = "";
-                var default_checkin = "";
-                var default_checkout = "";
-                var min_checkin = "";
-                var max_checkout = "";
-
-                // var default_checkin = moment().add(14, 'days').format('MM/DD/YYYY'); // MM/DD/YYYY format
-                // var default_checkout = moment().add(18, 'days').format('MM/DD/YYYY');
-                // var min_checkin = moment().format('MM/DD/YYYY');
-                // var max_checkout = moment().add(5, 'years').format('MM/DD/YYYY');
-                var submission_url = "http://lodging.bookwesteros.com/search";
-                var value_add_code = "";
-
-                var s = document.createElement("script"), t = document.getElementsByTagName("script")[0];
-                s.id = "rootrezScript";
-                s.src = "widget.min.js";
-                s.setAttribute("data-default_checkin", default_checkin);
-                s.setAttribute("data-default_checkout", default_checkout);
-                s.setAttribute("data-min_checkin",min_checkin);
-                s.setAttribute("data-max_checkout",max_checkout);
-                s.setAttribute("data-submission_url",submission_url);
-                s.setAttribute("data-title_text",title_text);
-                s.setAttribute("data-tagline_text", tagline_text);
-                s.setAttribute("value_add_code", value_add_code);
-                t.parentNode.insertBefore(s, t);
-            };
-            window.addEventListener ? window.addEventListener("load", loader, false) : window.attachEvent("onload", loader);
-        })(window, document);
-        </script></head>
+        </head>
 
         <body>
 
             <section class="section">
                 <div class="container">
             <div class="columns">
-                <div class="column is-4"><svg height="80px" viewBox="0 0 244 225" width="auto" xmlns="http://www.w3.org/2000/svg">
+                <div class="column is-4"><svg height="80px" viewBox="0 0 244 225" width="100%" xmlns="http://www.w3.org/2000/svg">
                         <title>rootrez-logo-vertical</title>
                         <g data-name="Layer 2" id="1b23189e-07b5-4bbe-bb95-175fe1eadc6d">
                             <g data-name="Layer 1" id="dc7bee37-6441-48e1-a2e9-9dd547db49f4">
@@ -137,8 +103,8 @@
                             <li>Place the <code>&lt;style&gt;</code> section and place it in the <code>&lt;head&gt;</code> section of your page.
                             </li>
                             <li>Styles - modify the CSS styling rules as needed. You may need to use <code>!important</code> to override some rules.</li>
-                            <li>Place the <code>&lt;script&gt;</code> section and place it in the <code>&lt;body&gt;</code> section of your page
-                                near the end of the file.</li>
+                            <li>Copy & Paste the <code>&lt;script&gt;</code> section and place it wrapped by the <code>&lt;body&gt;</code> section of your page
+                                inmediately before the closing <code>&lt;/body&gt;</code> tag.</li>
                             <li>Dates - modify the <strong>default_checkin, default_checkout, min_checkin, and max_checkout</strong> as needed.
                                 They can be left blank to not set a default, but will default on the booking site to a checkin
                                 two weeks in the future, and a checkout four days after that.</li>
@@ -147,6 +113,7 @@
                             <li>URL - modify the <code>submission_url</code> to point to your RootRez-hosted booking site. Want to customize
                                 your submission url to default to an advanced search? Let us know and we can provide the custom links to get your
                                 customer the most appropriate search results.</li>
+                            <li></li>
                             <li>Place the <code>&lt;div id="RootRezWidget"&gt;&lt;/div&gt;</code> container on your page wherever you want our
                                 widget to appear.</li>
                             <li>That's it! We'll handle the rest!</li>
@@ -204,11 +171,13 @@
             var default_checkout = ""; // MM/DD/YYYY (e.g. 06/15/2020)
             var min_checkin = ""; // MM/DD/YYYY (e.g. 06/01/2020)
             var max_checkout = ""; // MM/DD/YYYY (e.g. 06/28/2020)
+            var value_add_code = "";
+            var results_in_new_tab = false;
 
             var s = document.createElement("script");
             var t = document.getElementsByTagName("script")[0];
             s.id = "rootrezScript";
-            s.src = "https://assets.rootrez.com/book-your-stay/widget-2.min.js";
+            s.src = "https://assets.rootrez.com/book-your-stay/widget.min.js";
             s.setAttribute("data-default_checkin", default_checkin);
             s.setAttribute("data-default_checkout", default_checkout);
             s.setAttribute("data-min_checkin", min_checkin);
@@ -216,6 +185,8 @@
             s.setAttribute("data-submission_url", submission_url);
             s.setAttribute("data-title_text", title_text);
             s.setAttribute("data-tagline_text", tagline_text);
+            s.setAttribute("data-value_add_code", value_add_code);
+            s.setAttribute("data-results_in_new_tab", results_in_new_tab);
             t.parentNode.insertBefore(s, t);
         };
         window.addEventListener
@@ -243,6 +214,43 @@
                     </div>
                 </footer>
             </section>
+            <script>
+                (function (window, document) {
+                    var loader = function () {
+                        var title_text = "Book Your Downtown Lodging Here";
+                        var tagline_text = "Simply put, nobody knows Salt Lake better, has lower rates or a better selection of incredible hotels and lodging. Search & book with locals.";
+                        // var title_text = "";
+                        // var tagline_text = "";
+                        var default_checkin = "";
+                        var default_checkout = "";
+                        var min_checkin = "";
+                        var max_checkout = "";
+        
+                        // var default_checkin = moment().add(14, 'days').format('MM/DD/YYYY'); // MM/DD/YYYY format
+                        // var default_checkout = moment().add(18, 'days').format('MM/DD/YYYY');
+                        // var min_checkin = moment().format('MM/DD/YYYY');
+                        // var max_checkout = moment().add(5, 'years').format('MM/DD/YYYY');
+                        var submission_url = "http://lodging.bookwesteros.com/search";
+                        var value_add_code = "";
+                        var results_in_new_tab = true;
+        
+                        var s = document.createElement("script"), t = document.getElementsByTagName("script")[0];
+                        s.id = "rootrezScript";
+                        s.src = "widget.min.js";
+                        s.setAttribute("data-default_checkin", default_checkin);
+                        s.setAttribute("data-default_checkout", default_checkout);
+                        s.setAttribute("data-min_checkin",min_checkin);
+                        s.setAttribute("data-max_checkout",max_checkout);
+                        s.setAttribute("data-submission_url",submission_url);
+                        s.setAttribute("data-title_text",title_text);
+                        s.setAttribute("data-tagline_text", tagline_text);
+                        s.setAttribute("data-value_add_code", value_add_code);
+                        s.setAttribute("data-results_in_new_tab", results_in_new_tab);
+                        t.parentNode.insertBefore(s, t);
+                    };
+                    window.addEventListener ? window.addEventListener("load", loader, false) : window.attachEvent("onload", loader);
+                })(window, document);
+            </script>
         </body>
 
         </html>

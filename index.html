@@ -41,36 +41,7 @@
         }
 
     </style>
-    <script>
-    (function (window, document) {
-        var loader = function () {
-            var title_text = "";
-            var tagline_text = "";
-            var default_checkin = "";
-            var default_checkout = "";
-            var min_checkin = "";
-            var max_checkout = "";
-            var submission_url = "http://lodging.visitsaltlake.rootrez.review/search";
-            var value_add_code = ""; //When using the value add dropdown, normally leave this blank. Adding a promocode here will make it a default code that is passed in when no others are selected.
-            var s = document.createElement("script"), t = document.getElementsByTagName("script")[0];
-            s.id = "rootrezScript";
-            s.src = "widget.min.js";
-			s.setAttribute("data-default_checkin", default_checkin);
-            s.setAttribute("data-default_checkout", default_checkout);
-            s.setAttribute("data-min_checkin",min_checkin);
-            s.setAttribute("data-publisher_key","VSL-5bf023f6fab7f6a98877b8881eed24833f798632"); //Need the client's api key to get list of discounts from the api
-            s.setAttribute("data-max_checkout",max_checkout);
-            s.setAttribute("data-submission_url",submission_url);
-            s.setAttribute("data-title_text",title_text);
-            s.setAttribute("data-tagline_text", tagline_text);
-            s.setAttribute("data-value_add_code", value_add_code);
-            s.setAttribute("data-api_url", "https://api-staging.rootrez.com");   
-            s.setAttribute("data-locale", "en-us");  //Default: en-us. Also available: fr-ca             
-			t.parentNode.insertBefore(s, t);
-            };
-            window.addEventListener ? window.addEventListener("load", loader, false) : window.attachEvent("onload", loader);
-        })(window, document);
-        </script></head>
+</head>
 
         <body>
 
@@ -128,8 +99,8 @@
                             <li>Place the <code>&lt;style&gt;</code> section and place it in the <code>&lt;head&gt;</code> section of your page.
                             </li>
                             <li>Styles - modify the CSS styling rules as needed. You may need to use <code>!important</code> to override some rules.</li>
-                            <li>Place the <code>&lt;script&gt;</code> section and place it in the <code>&lt;body&gt;</code> section of your page
-                                near the end of the file.</li>
+                            <li>Copy & Paste the <code>&lt;script&gt;</code> section and place it wrapped by the <code>&lt;body&gt;</code> section of your page
+                                inmediately before the closing <code>&lt;/body&gt;</code> tag.</li>
                             <li>Dates - modify the <strong>default_checkin, default_checkout, min_checkin, and max_checkout</strong> as needed.
                                 They can be left blank to not set a default, but will default on the booking site to a checkin
                                 two weeks in the future, and a checkout four days after that.</li>
@@ -145,6 +116,7 @@
                             	only shows those value adds which are valid in the chosen date range.</li>
                             <li>Localization - to display the calendar in another language, modify the <code>data-locale</code> value to one of the 
                             	available translations. Currently available translations are: "en-us" for English, and "fr-ca" for French.</li>
+                            <li>Results Window - Results will be shown on the current window or into a new window/tab based on this setting. Modify the <code>results_in_new_tab</code> value for true (new window/tab) or false (current window/tab). Defaults to false.</li>
                             <li>Place the <code>&lt;div id="RootRezWidget"&gt;&lt;/div&gt;</code> container on your page wherever you want our
                                 widget to appear.</li>
                             <li>That's it! We'll handle the rest!</li>
@@ -193,25 +165,25 @@
 # place inside your html body near the bottom
 &lt;script&gt;
     (function (window, document) {
-        var loader = function () {
+        let loader = function () {
 
             // required (update with your lodging subdomain):
-            var submission_url = "https://lodging.visitsaltlake.com/search";
+            let submission_url = "https://lodging.visitsaltlake.com/search";
             // optional widget title. replace with empty strings to remove.
-            var title_text = "Book Your Downtown Lodging Here";
-            var tagline_text = "Simply put, nobody knows Salt Lake better, ";
+            let title_text = "Book Your Downtown Lodging Here";
+            let tagline_text = "Simply put, nobody knows Salt Lake better, ";
             tagline_text += "has lower rates or a better selection of incredible ";
             tagline_text += "hotels and lodging. Search & book with locals.";
 
             // optional (these values can be left empty):
-            var default_checkin = ""; // MM/DD/YYYY (e.g. 06/07/2020)
-            var default_checkout = ""; // MM/DD/YYYY (e.g. 06/15/2020)
-            var min_checkin = ""; // MM/DD/YYYY (e.g. 06/01/2020)
-            var max_checkout = ""; // MM/DD/YYYY (e.g. 06/28/2020)
-            
-            var value_add_code = ""; //Leave blank. This is for optionally overriding available value-adds.
+            let default_checkin = ""; // MM/DD/YYYY (e.g. 06/07/2020)
+            let default_checkout = ""; // MM/DD/YYYY (e.g. 06/15/2020)
+            let min_checkin = ""; // MM/DD/YYYY (e.g. 06/01/2020)
+            let max_checkout = ""; // MM/DD/YYYY (e.g. 06/28/2020)
+            let value_add_code = ""; //Leave blank. This is for optionally overriding available value-adds.
+            let results_in_new_tab = true; // true = opens results in a new window/tab ; false = opens results in the current window/tab
 
-            var s = document.createElement("script"), t = document.getElementsByTagName("script")[0];
+            let s = document.createElement("script"), t = document.getElementsByTagName("script")[0];
             s.id = "rootrezScript";
             s.src = "https://assets.rootrez.com/book-your-stay/widget.min.js";
 			s.setAttribute("data-default_checkin", default_checkin);
@@ -225,6 +197,7 @@
             s.setAttribute("data-value_add_code", value_add_code);
             s.setAttribute("data-api_url", "https://svc.rootrez.com");  
             s.setAttribute("data-locale", "en-us");  //Default: en-us. Also available: fr-ca
+            s.setAttribute("data-results_in_new_tab", results_in_new_tab);
             t.parentNode.insertBefore(s, t);
         };
         window.addEventListener
@@ -252,6 +225,39 @@
                     </div>
                 </footer>
             </section>
+            <script>
+                (function (window, document) {
+                    let loader = function () {
+                        let title_text = "";
+                        let tagline_text = "";
+                        let default_checkin = "";
+                        let default_checkout = "";
+                        let min_checkin = "";
+                        let max_checkout = "";
+                        let submission_url = "http://lodging.visitsaltlake.com/search";
+                        let value_add_code = ""; //When using the value add dropdown, normally leave this blank. Adding a promocode here will make it a default code that is passed in when no others are selected.
+                        let results_in_new_tab = true; // true = opens results on a new window/tab ; false = opens results on current window/tab
+
+                        let s = document.createElement("script"), t = document.getElementsByTagName("script")[0];
+                        s.id = "rootrezScript";
+                        s.src = "widget.min.js";
+                        s.setAttribute("data-default_checkin", default_checkin);
+                        s.setAttribute("data-default_checkout", default_checkout);
+                        s.setAttribute("data-min_checkin",min_checkin);
+                        s.setAttribute("data-publisher_key","VSL-5bf023f6fab7f6a98877b8881eed24833f798632"); //Need the client's api key to get list of discounts from the api
+                        s.setAttribute("data-max_checkout",max_checkout);
+                        s.setAttribute("data-submission_url",submission_url);
+                        s.setAttribute("data-title_text",title_text);
+                        s.setAttribute("data-tagline_text", tagline_text);
+                        s.setAttribute("data-value_add_code", value_add_code);
+                        s.setAttribute("data-api_url", "https://api-staging.rootrez.com");   
+                        s.setAttribute("data-locale", "en-us");  //Default: en-us. Also available: fr-ca
+                        s.setAttribute("data-results_in_new_tab", results_in_new_tab);          
+                        t.parentNode.insertBefore(s, t);
+                        };
+                        window.addEventListener ? window.addEventListener("load", loader, false) : window.attachEvent("onload", loader);
+                    })(window, document);
+                </script>
         </body>
 
         </html>

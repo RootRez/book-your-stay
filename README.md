@@ -107,6 +107,7 @@ var submission_url = "https://lodging.bookwesteros.com/search";
 | tagline_text   | Optional widget tagline. replace with empty strings to remove        |
 | value_add_code   | Optionally use one value add for all customers, instead of showing a list for them to choose from        |
 | locale   | Optional localization. Change to "fr-ca" for French localized widget calendar and text        |
+| results_in_new_tab   | Required (Boolean). Results will be shown on the current window or onto a new window/tab based on this setting. Defaults to false.       |
 
 ## Developer Info
 [Building an embeddable Javascript widget](https://thomassileo.name/blog/2014/03/27/building-an-embeddable-javascript-widget-third-party-javascript/)

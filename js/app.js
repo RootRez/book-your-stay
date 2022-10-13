@@ -12,6 +12,10 @@ define([
     init: function (config) {
       // get the settings and make them available through the app
       settings = config;
+
+      if(!settings.hasOwnProperty('results_in_new_tab') || settings.results_in_new_tab === undefined){
+      	settings.results_in_new_tab = false;
+      }
       
       if(!settings.hasOwnProperty('locale') || settings.locale === undefined){
       	settings.locale = "en-us";
@@ -353,8 +357,15 @@ if(settings.locale == "fr-ca"){
       } else {
         var finalUrl = settings.submission_url + formData + "&GuestsAdult=" + numAdults + "&GuestsChildren=" + numChildren;
       }
-      //console.log(finalUrl);
-      window.location.href = finalUrl;
+      
+      if (settings.results_in_new_tab) {
+        window.open(
+          finalUrl,
+          '_blank'
+        );
+      } else {
+        window.location.href = finalUrl;
+      }
     });
   }
 
