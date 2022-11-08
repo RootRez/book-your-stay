@@ -121,7 +121,7 @@ define([
     //$("#PromoCode").hide();
     
     
-  },
+    },
   };
 
   // event initialization
@@ -141,28 +141,24 @@ define([
     if (settings.default_checkout != "") {
       $("#Checkout").val(settings.default_checkout);
     }
+    
+    let today = new Date();
+    if (settings.default_checkin !== "" && settings.default_checkout !== "") {
 
-    if (settings.default_checkin != "" && settings.default_checkout == "") {
-      var default_checkin = new Date(settings.default_checkin);
-      var default_checkout = new Date(settings.default_checkin);
-      default_checkout.setDate(default_checkin.getDate() + 1);
-      var checkout_dd = default_checkout.getDate();
-      var checkout_mm = default_checkout.getMonth() + 1;
-      var checkout_yyyy = default_checkout.getFullYear();
-      if (checkout_dd < 10) {
-        checkout_dd = "0" + checkout_dd;
-      }
+      let checkin_date_raw = new Date(settings.default_checkin);
+      let checkout_date_raw = new Date(settings.default_checkout);
 
-      if (checkout_mm < 10) {
-        checkout_mm = "0" + checkout_mm;
-      }
-      var checkout_date = checkout_mm + "/" + checkout_dd + "/" + checkout_yyyy;
-      $("#Checkout").val(checkout_date);
-      settings.default_checkout = checkout_date;
-    }
+      let checkin_date = composeDate( checkin_date_raw, 1, 1);
+      let checkin_date_mm_dd_yyyy = checkin_date[0] + '/' + checkin_date[1] + '/' + checkin_date[2];
+      $("#Checkin").val(checkin_date_mm_dd_yyyy);
+      settings.default_checkin = checkin_date_mm_dd_yyyy;
 
-    if (settings.default_checkin != "" && settings.default_checkout != "") {
-      var monthArr = [
+      let checkout_date = composeDate( checkout_date_raw, 1, 1 );
+      let checkout_date_mm_dd_yyyy = checkout_date[0] + '/' + checkout_date[1] + '/' + checkout_date[2];
+      $("#Checkout").val(checkout_date_mm_dd_yyyy);
+      settings.default_checkout = checkout_date_mm_dd_yyyy;
+
+      let monthArr = [
         "Jan",
         "Feb",
         "Mar",
@@ -176,110 +172,105 @@ define([
         "Nov",
         "Dec",
       ];
-      var defaultCheckin = new Date(settings.default_checkin);
-      var defaultCheckout = new Date(settings.default_checkout);
+
       $("#rootrez_daterangepicker").html(
-        monthArr[defaultCheckin.getMonth()] +
-          " " +
-          defaultCheckin.getDate() +
-          ", " +
-          defaultCheckin.getFullYear() +
-          " &rarr; " +
-          monthArr[defaultCheckout.getMonth()] +
-          " " +
-          defaultCheckout.getDate() +
-          ", " +
-          defaultCheckout.getFullYear()
+        monthArr[checkin_date_raw.getMonth()] +
+        " " +
+        checkin_date_raw.getDate() +
+        ", " +
+        checkin_date_raw.getFullYear() +
+        " &rarr; " +
+        monthArr[checkout_date_raw.getMonth()] +
+        " " +
+        checkout_date_raw.getDate() +
+        ", " +
+        checkout_date_raw.getFullYear()
       );
+    } else {
+      let date = composeDate( today, 1, 1 );
+      let date_mm_dd_yyyy = date[0] + '/' + date[1] + '/' + date[2];
+      settings.default_checkin = date_mm_dd_yyyy;
+      settings.default_checkout = date_mm_dd_yyyy;
     }
 
-    if (settings.min_checkin == "") {
-      var today = new Date();
-      var dd = today.getDate();
-      var mm = today.getMonth() + 1;
-      var yyyy = today.getFullYear();
-      if (dd < 10) {
-        dd = "0" + dd;
+    let min_checkin_date_arr = [];
+    if (settings.min_checkin !== "") {
+      let min_checkin_date_raw = new Date(settings.min_checkin);
+      if ( min_checkin_date_raw < today) {
+        min_checkin_date_arr = composeDate( today, 1, 1);
+      } else {
+        min_checkin_date_arr = composeDate( min_checkin_date_raw, 1, 1);
       }
-
-      if (mm < 10) {
-        mm = "0" + mm;
-      }
-      var today_date = mm + "/" + dd + "/" + yyyy;
-      settings.min_checkin = today_date;
     }
+    let min_checkin_mm_dd_yyyy = min_checkin_date_arr[0] + '/' + min_checkin_date_arr[1] + '/' + min_checkin_date_arr[2];
+    settings.min_checkin = min_checkin_mm_dd_yyyy;
 
-    if (settings.max_checkout == "") {
-      var today = new Date();
-      var dd = today.getDate();
-      var mm = today.getMonth() + 1;
-      if (dd < 10) {
-        dd = "0" + dd;
-      }
-      if (mm < 10) {
-        mm = "0" + mm;
-      }
-      var yyyy = today.getFullYear() + 2;
-      var today_date = mm + "/" + dd + "/" + yyyy;
-      settings.max_checkout = today_date;
+    let max_checkout_date_raw = today, y=0;
+    if (settings.max_checkout !== "") {
+      max_checkout_date_raw = new Date(settings.max_checkout);
+    } else {
+      max_checkout_date_raw = today;
+      y = 2;
     }
-if(settings.locale == "fr-ca"){
-    var dpSettings = {
-      minDate: settings.min_checkin,
-      maxDate: settings.max_checkout,
-      dateLimit: {
-        days: 28,
-      },
-      applyClass: "",
-      cancelClass: "",
-      buttonClasses: "",
-      "locale": {
-        "format": "MM/DD/YYYY",
-        "separator": " - ",
-        "applyLabel": "Appliquer",
-        "cancelLabel": "Annuler",
-        "fromLabel": "From",
-        "toLabel": "To",
-        "customRangeLabel": "Custom",
-        "weekLabel": "W",
-        "daysOfWeek": [
-            "di",
-			"lu",
-			"ma",
-			"me",
-			"je",
-			"ve",
-			"sa"
-        ],
-        "monthNames": [
-            "janvier",
-			"février",
-			"mars",
-			"avril",
-			"mai",
-			"juin",
-			"juillet",
-			"août",
-			"septembre",
-			"octobre",
-			"novembre",
-			"décembre"
-        ],
-        "firstDay": 1
-      }
-    };
-} else {
-	var dpSettings = {
-      minDate: settings.min_checkin,
-      maxDate: settings.max_checkout,
-      dateLimit: {
-        days: 28,
-      },
-      applyClass: "",
-      cancelClass: "",
-      buttonClasses: ""
-    };
-}
+    let max_checkout_date_arr = composeDate( max_checkout_date_raw, 1, 1, y); // yyyy + 2 ?
+    let max_checkout_mm_dd_yyyy = max_checkout_date_arr[0] + '/' + max_checkout_date_arr[1] + '/' + max_checkout_date_arr[2];
+    settings.max_checkout = max_checkout_mm_dd_yyyy;
+
+    if(settings.locale == "fr-ca"){
+        var dpSettings = {
+          // "startDate": settings.default_checkin,
+          // "endDate": settings.default_checkout,
+          "minDate": settings.min_checkin,
+          "maxDate": settings.max_checkout,
+          "applyClass": "",
+          "cancelClass": "",
+          "buttonClasses": "",
+          "locale": {
+            "format": "MM/DD/YYYY",
+            "separator": " - ",
+            "applyLabel": "Appliquer",
+            "cancelLabel": "Annuler",
+            "fromLabel": "From",
+            "toLabel": "To",
+            "customRangeLabel": "Custom",
+            "weekLabel": "W",
+            "daysOfWeek": [
+              "di",
+              "lu",
+              "ma",
+              "me",
+              "je",
+              "ve",
+              "sa"
+            ],
+            "monthNames": [
+              "janvier",
+              "février",
+              "mars",
+              "avril",
+              "mai",
+              "juin",
+              "juillet",
+              "août",
+              "septembre",
+              "octobre",
+              "novembre",
+              "décembre"
+            ],
+            "firstDay": 1
+          }
+        };
+    } else {
+      var dpSettings = {
+          "startDate": settings.default_checkin,
+          "endDate": settings.default_checkout,
+          "minDate": settings.min_checkin,
+          "maxDate": settings.max_checkout,
+          "applyClass": "",
+          "cancelClass": "",
+          "buttonClasses": ""
+        };
+    }
 	
     $("#rootrez-widget-form #rootrez_daterangepicker").daterangepicker(
       dpSettings,
@@ -296,7 +287,7 @@ if(settings.locale == "fr-ca"){
         $("#Checkin").val(start.format("MM/DD/YYYY"));
         $("#Checkout").val(end.format("MM/DD/YYYY"));
 
-		if(settings.value_add_code == ""){
+		    if(settings.value_add_code == ""){
 	        $.ajax({
 	          type: "GET",
 	          cache: false,
@@ -347,12 +338,11 @@ if(settings.locale == "fr-ca"){
       var numAdults = $("#adultnumber").val();
       var numChildren = $("#childnumber").val();
       if(settings.submission_url.indexOf("?") == -1){
-	      	settings.submission_url = settings.submission_url + "?";
+	      settings.submission_url = settings.submission_url + "?";
 		} else {
-	      	settings.submission_url = settings.submission_url + "&";
+	      settings.submission_url = settings.submission_url + "&";
 		}
       if(settings.value_add_code != "") {
-		
         var finalUrl = settings.submission_url + "PromoCode=" + settings.value_add_code + "&" + formData + "&GuestsAdult=" + numAdults + "&GuestsChildren=" + numChildren;
       } else {
         var finalUrl = settings.submission_url + formData + "&GuestsAdult=" + numAdults + "&GuestsChildren=" + numChildren;
@@ -375,11 +365,11 @@ if(settings.locale == "fr-ca"){
     // Add the empty option with the empty message
     if (result.data.length == 0) {
       dropdown.append('<li class="no-deals">' + emptyMessage + "</li>");
-      //$("#PromoCode").hide();
+      $("#PromoCode").hide();
       $(".rootrez_widget_form_wrapper").addClass("no-deals");
       $(".rootrez_widget_form_wrapper").removeClass("has-deals");
     } else {
-      //$("#PromoCode").show();
+      $("#PromoCode").show();
       $(".rootrez_widget_form_wrapper").removeClass("no-deals");
       $(".rootrez_widget_form_wrapper").addClass("has-deals");
     }
@@ -403,11 +393,33 @@ if(settings.locale == "fr-ca"){
         //console.log("Clicked discount id: "+selectedId);
         settings.value_add_code = selectedId;
       });
-      //$("#PromoCode").addClass("show");
-      //$("#PromoCode").removeClass("hide");
+      $("#PromoCode").addClass("show");
+      $("#PromoCode").removeClass("hide");
     } else {
-      //$("#PromoCode").addClass("hide");
-      //$("#PromoCode").removeClass("show");
+      $("#PromoCode").addClass("hide");
+      $("#PromoCode").removeClass("show");
+    }
+  }
+
+  // 'rawDate' should be instance of Date
+  function composeDate( rawDate, addDay = 0, addMonth = 0 , addYear = 0) {
+    let tempDate = (rawDate instanceof Date) ? rawDate : false;
+    if (tempDate) {
+      tempDate.setDate(tempDate.getDate() + addDay );
+      // console.log({ 'tempDate' : tempDate  })
+      let dd = tempDate.getDate();
+      let mm = tempDate.getMonth() + addMonth;
+      let yyyy = tempDate.getFullYear() + addYear;
+      if (dd < 10) {
+        dd = "0" + dd;
+      }
+
+      if (mm < 10) {
+        mm = "0" + mm;
+      }
+      return [mm,dd,yyyy];
+    } else {
+      return ['00','00','0000'];
     }
   }
 
