@@ -230,11 +230,11 @@
                     let loader = function () {
                         let title_text = "";
                         let tagline_text = "";
-                        let default_checkin = "";
-                        let default_checkout = "";
-                        let min_checkin = "";
-                        let max_checkout = "";
-                        let submission_url = "http://lodging.visitsaltlake.com/search";
+                        let default_checkin = "2022-11-14";
+                        let default_checkout = "2022-11-29";
+                        let min_checkin = "2022-11-12";
+                        let max_checkout = "2022-12-10";
+                        let submission_url = "http://lodging.alta.com/search";
                         let value_add_code = ""; //When using the value add dropdown, normally leave this blank. Adding a promocode here will make it a default code that is passed in when no others are selected.
                         let results_in_new_tab = true; // true = opens results on a new window/tab ; false = opens results on current window/tab
 
@@ -244,7 +244,7 @@
                         s.setAttribute("data-default_checkin", default_checkin);
                         s.setAttribute("data-default_checkout", default_checkout);
                         s.setAttribute("data-min_checkin",min_checkin);
-                        s.setAttribute("data-publisher_key","VSL-5bf023f6fab7f6a98877b8881eed24833f798632"); //Need the client's api key to get list of discounts from the api
+                        s.setAttribute("data-publisher_key","ASR-26d9f48bd7e7f4c04a59a9af7295ed07"); //Need the client's api key to get list of discounts from the api
                         s.setAttribute("data-max_checkout",max_checkout);
                         s.setAttribute("data-submission_url",submission_url);
                         s.setAttribute("data-title_text",title_text);
