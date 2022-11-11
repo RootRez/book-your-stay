@@ -226,6 +226,9 @@ define([
           "endDate": settings.default_checkout,
           "minDate": settings.min_checkin,
           "maxDate": settings.max_checkout,
+          "dateLimit": {
+            "days": 28,
+          },
           "applyClass": "",
           "cancelClass": "",
           "buttonClasses": "",
@@ -270,6 +273,9 @@ define([
           "endDate": settings.default_checkout,
           "minDate": settings.min_checkin,
           "maxDate": settings.max_checkout,
+          "dateLimit": {
+            "days": 28,
+          },
           "applyClass": "",
           "cancelClass": "",
           "buttonClasses": ""
