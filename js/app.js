@@ -13,6 +13,10 @@ define([
       // get the settings and make them available through the app
       settings = config;
 
+      if ( !settings.hasOwnProperty('features') || settings.features === undefined ) {
+        settings.features = '';
+      }
+
       if(!settings.hasOwnProperty('results_in_new_tab') || settings.results_in_new_tab === undefined){
       	settings.results_in_new_tab = false;
       }
@@ -334,18 +338,25 @@ define([
 
     $("#rootrez-widget-form").on("submit", function (e) {
       e.preventDefault();
-      var formData = $(this).serialize();
-      var numAdults = $("#adultnumber").val();
-      var numChildren = $("#childnumber").val();
+      let formData = $(this).serialize();
+      let numAdults = $("#adultnumber").val();
+      let numChildren = $("#childnumber").val();
+      let finalUrl = '';
+
       if(settings.submission_url.indexOf("?") == -1){
 	      settings.submission_url = settings.submission_url + "?";
 		  } else {
 	      settings.submission_url = settings.submission_url + "&";
 		  }
+
       if(settings.value_add_code != "") {
-        var finalUrl = settings.submission_url + "PromoCode=" + settings.value_add_code + "&" + formData + "&GuestsAdult=" + numAdults + "&GuestsChildren=" + numChildren;
+        finalUrl = settings.submission_url + "PromoCode=" + settings.value_add_code + "&" + formData + "&GuestsAdult=" + numAdults + "&GuestsChildren=" + numChildren;
       } else {
-        var finalUrl = settings.submission_url + formData + "&GuestsAdult=" + numAdults + "&GuestsChildren=" + numChildren;
+        finalUrl = settings.submission_url + formData + "&GuestsAdult=" + numAdults + "&GuestsChildren=" + numChildren;
+      }
+
+      if (settings.features != "") {
+        finalUrl+= "&features=" + settings.features ;
       }
       
       if (settings.results_in_new_tab) {
