@@ -352,23 +352,22 @@ define([
       var numAdults = $("#adultnumber").val();
       var numChildren = $("#childnumber").val();
       var submission_url = settings.submission_url;
-      var finalUrl = '';
 
       if (settings.referrals != "") {
         var splitted = submission_url.split("/");
         submission_url = splitted[0] + '//' + splitted[1] + splitted[2] + "/referral";
       }
-
+      
       if(submission_url.indexOf("?") == -1){
 	      submission_url = submission_url + "?";
 		  } else {
 	      submission_url = submission_url + "&";
 		  }
-
+      
       submission_url+= formData + "&GuestsAdult=" + numAdults + "&GuestsChildren=" + numChildren;
 
       if(settings.value_add_code != "") {
-        submission_url+= submission_url + "&PromoCode=" + settings.value_add_code;
+        submission_url+= "&PromoCode=" + settings.value_add_code;
       }
 
       if (settings.referrals != "") {
