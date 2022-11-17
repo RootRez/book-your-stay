@@ -150,23 +150,23 @@ define([
       $("#Checkout").val(settings.default_checkout);
     }
     
-    let today = new Date();
+    var today = new Date();
     if (settings.default_checkin !== "" && settings.default_checkout !== "") {
 
-      let checkin_date_raw = new Date(settings.default_checkin);
-      let checkout_date_raw = new Date(settings.default_checkout);
+      var checkin_date_raw = new Date(settings.default_checkin);
+      var checkout_date_raw = new Date(settings.default_checkout);
 
-      let checkin_date = composeDate( checkin_date_raw, 1, 1);
-      let checkin_date_mm_dd_yyyy = checkin_date[0] + '/' + checkin_date[1] + '/' + checkin_date[2];
+      var checkin_date = composeDate( checkin_date_raw, 1, 1);
+      var checkin_date_mm_dd_yyyy = checkin_date[0] + '/' + checkin_date[1] + '/' + checkin_date[2];
       $("#Checkin").val(checkin_date_mm_dd_yyyy);
       settings.default_checkin = checkin_date_mm_dd_yyyy;
 
-      let checkout_date = composeDate( checkout_date_raw, 1, 1 );
-      let checkout_date_mm_dd_yyyy = checkout_date[0] + '/' + checkout_date[1] + '/' + checkout_date[2];
+      var checkout_date = composeDate( checkout_date_raw, 1, 1 );
+      var checkout_date_mm_dd_yyyy = checkout_date[0] + '/' + checkout_date[1] + '/' + checkout_date[2];
       $("#Checkout").val(checkout_date_mm_dd_yyyy);
       settings.default_checkout = checkout_date_mm_dd_yyyy;
 
-      let monthArr = [
+      var monthArr = [
         "Jan",
         "Feb",
         "Mar",
@@ -195,33 +195,33 @@ define([
         checkout_date_raw.getFullYear()
       );
     } else {
-      let date = composeDate( today, 1, 1 );
-      let date_mm_dd_yyyy = date[0] + '/' + date[1] + '/' + date[2];
+      var date = composeDate( today, 1, 1 );
+      var date_mm_dd_yyyy = date[0] + '/' + date[1] + '/' + date[2];
       settings.default_checkin = date_mm_dd_yyyy;
       settings.default_checkout = date_mm_dd_yyyy;
     }
 
-    let min_checkin_date_arr = [];
+    var min_checkin_date_arr = [];
     if (settings.min_checkin !== "") {
-      let min_checkin_date_raw = new Date(settings.min_checkin);
+      var min_checkin_date_raw = new Date(settings.min_checkin);
       if ( min_checkin_date_raw < today) {
         min_checkin_date_arr = composeDate( today, 1, 1);
       } else {
         min_checkin_date_arr = composeDate( min_checkin_date_raw, 1, 1);
       }
     }
-    let min_checkin_mm_dd_yyyy = min_checkin_date_arr[0] + '/' + min_checkin_date_arr[1] + '/' + min_checkin_date_arr[2];
+    var min_checkin_mm_dd_yyyy = min_checkin_date_arr[0] + '/' + min_checkin_date_arr[1] + '/' + min_checkin_date_arr[2];
     settings.min_checkin = min_checkin_mm_dd_yyyy;
 
-    let max_checkout_date_raw = today, y=0;
+    var max_checkout_date_raw = today, y=0;
     if (settings.max_checkout !== "") {
       max_checkout_date_raw = new Date(settings.max_checkout);
     } else {
       max_checkout_date_raw = today;
       y = 2;
     }
-    let max_checkout_date_arr = composeDate( max_checkout_date_raw, 1, 1, y);
-    let max_checkout_mm_dd_yyyy = max_checkout_date_arr[0] + '/' + max_checkout_date_arr[1] + '/' + max_checkout_date_arr[2];
+    var max_checkout_date_arr = composeDate( max_checkout_date_raw, 1, 1, y);
+    var max_checkout_mm_dd_yyyy = max_checkout_date_arr[0] + '/' + max_checkout_date_arr[1] + '/' + max_checkout_date_arr[2];
     settings.max_checkout = max_checkout_mm_dd_yyyy;
 
     if(settings.locale == "fr-ca"){
@@ -261,7 +261,7 @@ define([
               "avril",
               "mai",
               "juin",
-              "juillet",
+              "juilvar",
               "août",
               "septembre",
               "octobre",
@@ -348,14 +348,14 @@ define([
 
     $("#rootrez-widget-form").on("submit", function (e) {
       e.preventDefault();
-      let formData = $(this).serialize();
-      let numAdults = $("#adultnumber").val();
-      let numChildren = $("#childnumber").val();
-      let submission_url = settings.submission_url;
-      let finalUrl = '';
+      var formData = $(this).serialize();
+      var numAdults = $("#adultnumber").val();
+      var numChildren = $("#childnumber").val();
+      var submission_url = settings.submission_url;
+      var finalUrl = '';
 
       if (settings.referrals != "") {
-        let splitted = submission_url.split("/");
+        var splitted = submission_url.split("/");
         submission_url = splitted[0] + '//' + splitted[1] + splitted[2] + "/referral";
       }
 
@@ -417,10 +417,10 @@ define([
           '<li class="deal-select" offer_id=""><span>' + 'None' + '</span><span class="tip" tooltip="Do not apply any offer to my selection."> <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12"><path d="M5.99999974,-1.133e-05 L5.99999974,-1.133e-05 C2.68628974,-1.133e-05 -2.6e-07,2.68629 -2.6e-07,6 C-2.6e-07,9.31371 2.68628974,12 5.99999974,12 C9.31370974,12 11.9999997,9.31371 11.9999997,6 L11.9999997,5.99993867 C11.9963833,2.68771367 9.31215968,0.00353867 5.99994967,-1.133e-05 L5.99999974,-1.133e-05 Z M6.125,2.5 L6.12499996,2.5 C6.53921346,2.5 6.87499996,2.8357865 6.87499996,3.25 C6.87499996,3.6642135 6.53921346,4 6.12499996,4 C5.71078646,4 5.37499996,3.6642135 5.37499996,3.25 L5.37499996,3.25000008 C5.37499996,2.83578658 5.71078646,2.5 6.12499996,2.5 L6.125,2.5 L6.125,2.5 Z M7.24999995,9.25 L5.24999995,9.25 L5.24999995,9.25 C4.97385748,9.25 4.74999995,9.0261425 4.74999995,8.75 C4.74999995,8.4738575 4.97385748,8.25 5.24999995,8.25 L5.62499998,8.25 L5.62499997,8.25 C5.69403547,8.25 5.74999995,8.1940355 5.74999995,8.125 L5.74999995,5.875 C5.74999995,5.8059645 5.69403547,5.75 5.62499997,5.75 L5.24999995,5.75 L5.24999995,5.75 C4.97385746,5.75 4.74999995,5.5261425 4.74999995,5.25 C4.74999995,4.9738575 4.97385746,4.75 5.24999995,4.75 L5.74999995,4.75 L5.74999995,4.75 C6.30228491,4.75 6.74999995,5.197715 6.74999995,5.75 L6.74999995,8.125 L6.74999995,8.12500002 C6.74999995,8.19403552 6.80596441,8.25 6.87499991,8.25 L7.24999995,8.25 L7.24999995,8.25 C7.52614239,8.25 7.74999995,8.47385752 7.74999995,8.75 C7.74999995,9.02614252 7.52614239,9.25 7.24999995,9.25 L7.24999995,9.25 Z"/></svg><span></li>'
         );
       $(".deal-select").click(function(event){
-        let selectedId = $(this).attr("offer_id");
+        var selectedId = $(this).attr("offer_id");
         $(".deal-select").removeClass("selected");
         $(this).addClass("selected")
-        let text = $(this)[0].firstChild.innerHTML;
+        var text = $(this)[0].firstChild.innerHTML;
         settings.value_add_code = selectedId;
         $("#PromoCode").removeClass("open");
         $("#choose-deal-text").text(text);
@@ -431,14 +431,17 @@ define([
   }
 
   // 'rawDate' should be instance of Date
-  function composeDate( rawDate, addDay = 0, addMonth = 0 , addYear = 0) {
-    let tempDate = (rawDate instanceof Date) ? rawDate : false;
+  function composeDate( rawDate, addDay, addMonth, addYear) {
+    var tempDate = (rawDate instanceof Date) ? rawDate : false;
+    var addDay = (addDay) ? addDay : 0;
+    var addMonth = (addMonth) ? addMonth : 0;
+    var addYear = (addYear) ? addYear : 0;
     if (tempDate) {
       tempDate.setDate(tempDate.getDate() + addDay );
       // console.log({ 'tempDate' : tempDate  })
-      let dd = tempDate.getDate();
-      let mm = tempDate.getMonth() + addMonth;
-      let yyyy = tempDate.getFullYear() + addYear;
+      var dd = tempDate.getDate();
+      var mm = tempDate.getMonth() + addMonth;
+      var yyyy = tempDate.getFullYear() + addYear;
       if (dd < 10) {
         dd = "0" + dd;
       }
