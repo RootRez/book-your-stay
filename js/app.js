@@ -368,7 +368,7 @@ define([
       submission_url+= formData + "&GuestsAdult=" + numAdults + "&GuestsChildren=" + numChildren;
 
       if(settings.value_add_code != "") {
-        submission_url+= submission_url + "PromoCode=" + settings.value_add_code;
+        submission_url+= submission_url + "&PromoCode=" + settings.value_add_code;
       }
 
       if (settings.referrals != "") {
