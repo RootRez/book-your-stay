@@ -18,6 +18,10 @@ require(["jquery", "js/app", "daterangepicker"], function($, app, daterangepicke
         value_add_code : $('script[id="rootrezScript"]').data("value_add_code"),
         locale : $('script[id="rootrezScript"]').data("locale"),
         results_in_new_tab : $('script[id="rootrezScript"]').data("results_in_new_tab"),
+        features : $('script[id="rootrezScript"]').data("features"),
+        referrals : $('script[id="rootrezScript"]').data("referrals"),
+        property_type : $('script[id="rootrezScript"]').data("property_type"),
+        areas : $('script[id="rootrezScript"]').data("areas"),
      };
      $(function() {
         app.init(config);

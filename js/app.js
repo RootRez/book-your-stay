@@ -13,6 +13,14 @@ define([
       // get the settings and make them available through the app
       settings = config;
 
+      if ( !settings.hasOwnProperty('referrals') || settings.referrals === undefined ) {
+        settings.referrals = '';
+      }
+
+      if ( !settings.hasOwnProperty('features') || settings.features === undefined ) {
+        settings.features = '';
+      }
+
       if(!settings.hasOwnProperty('results_in_new_tab') || settings.results_in_new_tab === undefined){
       	settings.results_in_new_tab = false;
       }
@@ -212,7 +220,7 @@ define([
       max_checkout_date_raw = today;
       y = 2;
     }
-    let max_checkout_date_arr = composeDate( max_checkout_date_raw, 1, 1, y); // yyyy + 2
+    let max_checkout_date_arr = composeDate( max_checkout_date_raw, 1, 1, y);
     let max_checkout_mm_dd_yyyy = max_checkout_date_arr[0] + '/' + max_checkout_date_arr[1] + '/' + max_checkout_date_arr[2];
     settings.max_checkout = max_checkout_mm_dd_yyyy;
 
@@ -222,6 +230,9 @@ define([
           "endDate": settings.default_checkout,
           "minDate": settings.min_checkin,
           "maxDate": settings.max_checkout,
+          "dateLimit": {
+            "days": 28,
+          },
           "applyClass": "",
           "cancelClass": "",
           "buttonClasses": "",
@@ -266,6 +277,9 @@ define([
           "endDate": settings.default_checkout,
           "minDate": settings.min_checkin,
           "maxDate": settings.max_checkout,
+          "dateLimit": {
+            "days": 28,
+          },
           "applyClass": "",
           "cancelClass": "",
           "buttonClasses": ""
@@ -334,27 +348,44 @@ define([
 
     $("#rootrez-widget-form").on("submit", function (e) {
       e.preventDefault();
-      var formData = $(this).serialize();
-      var numAdults = $("#adultnumber").val();
-      var numChildren = $("#childnumber").val();
-      if(settings.submission_url.indexOf("?") == -1){
-	      settings.submission_url = settings.submission_url + "?";
+      let formData = $(this).serialize();
+      let numAdults = $("#adultnumber").val();
+      let numChildren = $("#childnumber").val();
+      let submission_url = settings.submission_url;
+      let finalUrl = '';
+
+      if (settings.referrals != "") {
+        let splitted = submission_url.split("/");
+        submission_url = splitted[0] + '//' + splitted[1] + splitted[2] + "/referral";
+      }
+
+      if(submission_url.indexOf("?") == -1){
+	      submission_url = submission_url + "?";
 		  } else {
-	      settings.submission_url = settings.submission_url + "&";
+	      submission_url = submission_url + "&";
 		  }
+
+      submission_url+= formData + "&GuestsAdult=" + numAdults + "&GuestsChildren=" + numChildren;
+
       if(settings.value_add_code != "") {
-        var finalUrl = settings.submission_url + "PromoCode=" + settings.value_add_code + "&" + formData + "&GuestsAdult=" + numAdults + "&GuestsChildren=" + numChildren;
-      } else {
-        var finalUrl = settings.submission_url + formData + "&GuestsAdult=" + numAdults + "&GuestsChildren=" + numChildren;
+        submission_url+= submission_url + "PromoCode=" + settings.value_add_code;
+      }
+
+      if (settings.referrals != "") {
+        submission_url+= "&Code=" + settings.referrals ;
+      }
+
+      if (settings.features != "") {
+        submission_url+= "&features=" + settings.features ;
       }
       
       if (settings.results_in_new_tab) {
         window.open(
-          finalUrl,
+          submission_url,
           '_blank'
         );
       } else {
-        window.location.href = finalUrl;
+        window.location.href = submission_url;
       }
     });
   }
@@ -377,7 +408,6 @@ define([
     if ("data" in result && result.data.length > 0) {
       // Loop through each of the results and append the option to the dropdown
       $.each(result.data, function (k, v) {
-        //console.log(v);
         dropdown.append(
           '<li class="deal-select" offer_id="'+ v.code +'"><span>' + v.title + '</span><span class="tip" tooltip="' + v.description +'"> <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12"><path d="M5.99999974,-1.133e-05 L5.99999974,-1.133e-05 C2.68628974,-1.133e-05 -2.6e-07,2.68629 -2.6e-07,6 C-2.6e-07,9.31371 2.68628974,12 5.99999974,12 C9.31370974,12 11.9999997,9.31371 11.9999997,6 L11.9999997,5.99993867 C11.9963833,2.68771367 9.31215968,0.00353867 5.99994967,-1.133e-05 L5.99999974,-1.133e-05 Z M6.125,2.5 L6.12499996,2.5 C6.53921346,2.5 6.87499996,2.8357865 6.87499996,3.25 C6.87499996,3.6642135 6.53921346,4 6.12499996,4 C5.71078646,4 5.37499996,3.6642135 5.37499996,3.25 L5.37499996,3.25000008 C5.37499996,2.83578658 5.71078646,2.5 6.12499996,2.5 L6.125,2.5 L6.125,2.5 Z M7.24999995,9.25 L5.24999995,9.25 L5.24999995,9.25 C4.97385748,9.25 4.74999995,9.0261425 4.74999995,8.75 C4.74999995,8.4738575 4.97385748,8.25 5.24999995,8.25 L5.62499998,8.25 L5.62499997,8.25 C5.69403547,8.25 5.74999995,8.1940355 5.74999995,8.125 L5.74999995,5.875 C5.74999995,5.8059645 5.69403547,5.75 5.62499997,5.75 L5.24999995,5.75 L5.24999995,5.75 C4.97385746,5.75 4.74999995,5.5261425 4.74999995,5.25 C4.74999995,4.9738575 4.97385746,4.75 5.24999995,4.75 L5.74999995,4.75 L5.74999995,4.75 C6.30228491,4.75 6.74999995,5.197715 6.74999995,5.75 L6.74999995,8.125 L6.74999995,8.12500002 C6.74999995,8.19403552 6.80596441,8.25 6.87499991,8.25 L7.24999995,8.25 L7.24999995,8.25 C7.52614239,8.25 7.74999995,8.47385752 7.74999995,8.75 C7.74999995,9.02614252 7.52614239,9.25 7.24999995,9.25 L7.24999995,9.25 Z"/></svg><span></li>'
         );
@@ -390,11 +420,10 @@ define([
         let selectedId = $(this).attr("offer_id");
         $(".deal-select").removeClass("selected");
         $(this).addClass("selected")
-        // let text = $(this)[0].firstChild.innerHTML;
-        // console.log("Clicked discount id: "+selectedId);
+        let text = $(this)[0].firstChild.innerHTML;
         settings.value_add_code = selectedId;
         $("#PromoCode").removeClass("open");
-        // $("#choose-deal-text").text(selectedId);
+        $("#choose-deal-text").text(text);
       });
     } else {
       $("#PromoCode").removeClass("open");
