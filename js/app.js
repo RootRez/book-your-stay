@@ -13,6 +13,14 @@ define([
       // get the settings and make them available through the app
       settings = config;
 
+      if ( !settings.hasOwnProperty('areas') || settings.areas === undefined ) {
+        settings.areas = '';
+      }
+
+      if ( !settings.hasOwnProperty('prop_types') || settings.prop_types === undefined ) {
+        settings.prop_types = '';
+      }
+
       if ( !settings.hasOwnProperty('referrals') || settings.referrals === undefined ) {
         settings.referrals = '';
       }
@@ -376,6 +384,14 @@ define([
 
       if (settings.features != "") {
         submission_url+= "&features=" + settings.features ;
+      }
+
+      if (settings.prop_types != "") {
+        submission_url+= "&propertyType=" + settings.prop_types ;
+      }
+
+      if (settings.areas != "") {
+        submission_url+= "&areas=" + settings.areas ;
       }
       
       if (settings.results_in_new_tab) {
