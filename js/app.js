@@ -202,6 +202,23 @@ define([
         ", " +
         checkout_date_raw.getFullYear()
       );
+      
+      if(settings.value_add_code == ""){
+        $.ajax({
+          type: "GET",
+          cache: false,
+          url: settings.api_url + "/publisher/v3.0/discounts/grouped.json",
+          data: {
+            checkin: checkin_date_mm_dd_yyyy,
+            checkout: checkout_date_mm_dd_yyyy,
+            key: settings.publisher_key,
+          },
+          success: function (response) {
+            buildDropdown(response, $("#deals-ul"), "No offers available for selected dates");
+          },
+        });
+      }
+
     } else {
       var date = composeDate( today, 1, 1 );
       var date_mm_dd_yyyy = date[0] + '/' + date[1] + '/' + date[2];
