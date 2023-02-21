@@ -6,10 +6,15 @@ define([
   "use strict";
 
   // private variables here...
-  var settings, $form;
+  var settings, $form, offer, dates;
 
   var app = {
     init: function (config) {
+      window.dataLayer = window.dataLayer || [];
+
+      offer = 'Offer Not Presented';
+      dates = 'Dates Not Selected';
+
       // get the settings and make them available through the app
       settings = config;
 
@@ -101,8 +106,17 @@ define([
     var $ccounter = $(".children .counter");
 
     function guestTotals() {
-      var tot = parseInt(+$acounter.val() + +$ccounter.val());
+      var adults = $acounter.val();
+      var children = $ccounter.val();
+      var tot = parseInt(+ adults + + children);
       $(".guest-total span span").text(tot);
+      dataLayer.push({
+        'event': 'rootrez',
+        'eventCategory': 'Lodging Search Widget',
+        'eventAction': 'Occupancy Selected',
+        'eventLabel': 'Adults:'+adults+',Children:'+children
+      });
+      
     }
 
     $apbutton.click(function () {
@@ -317,7 +331,7 @@ define([
       	var dispFormat;
       	if(settings.locale == "fr-ca"){
       		dispFormat = "YYYY-MM-DD";
-      	} else{
+      	} else {
       		dispFormat = "MMM D YYYY";
       	}
         $("#rootrez_daterangepicker").html(
@@ -325,6 +339,13 @@ define([
         );
         $("#Checkin").val(start.format("MM/DD/YYYY"));
         $("#Checkout").val(end.format("MM/DD/YYYY"));
+
+        dataLayer.push({
+          'event': 'rootrez',
+          'eventCategory': 'Lodging Search Widget',
+          'eventAction': 'Dates Selected',
+          'eventLabel': start.format("MM/DD/YYYY") + ',' + end.format("MM/DD/YYYY")
+        });
 
 		    if(settings.value_add_code == ""){
 	        $.ajax({
@@ -371,12 +392,23 @@ define([
       );
     }
 
+    // $('#rootrez-widget-form').on('apply.daterangepicker', function(ev, picker) {
+    //   dataLayer.push({
+    //     'event': 'rootrez',
+    //     'eventCategory': 'Lodging Search Widget',
+    //     'eventAction': 'Dates Selected',
+    //     'eventLabel': picker.startDate.format('YYYY-MM-DD') + ',' + picker.endDate.format('YYYY-MM-DD')
+    //   });
+    // });
+
     $("#rootrez-widget-form").on("submit", function (e) {
       e.preventDefault();
       var formData = $(this).serialize();
       var numAdults = $("#adultnumber").val();
       var numChildren = $("#childnumber").val();
       var submission_url = settings.submission_url;
+      var Checkin = $("#Checkin").val();
+      var Checkout = $("#Checkout").val();
 
       if (settings.referrals != "") {
         var splitted = submission_url.split("/");
@@ -389,10 +421,18 @@ define([
 	      submission_url = submission_url + "&";
 		  }
       
-      submission_url+= formData + "&GuestsAdult=" + numAdults + "&GuestsChildren=" + numChildren;
+      submission_url+= formData + "&Source=searchWidget&GuestsAdult=" + numAdults + "&GuestsChildren=" + numChildren;
+
+      if ( Checkin != "" && Checkout != "") {
+        dates='Dates Selected';
+      }
 
       if(settings.value_add_code != "") {
         submission_url+= "&PromoCode=" + settings.value_add_code;
+        offer='Offer Selected';
+      } else if (offer == 'Offer Presented') {
+        submission_url+= "&PromoCode=NotSelected";
+        offer='Offer Not Selected';
       }
 
       if (settings.referrals != "") {
@@ -419,6 +459,13 @@ define([
       } else {
         window.location.href = submission_url;
       }
+
+      dataLayer.push({
+        'event': 'rootrez',
+        'eventCategory': 'Lodging Search Widget',
+        'eventAction': 'Search Submit',
+        'eventLabel': dates + ',' + offer
+      });
     });
   }
 
@@ -456,7 +503,14 @@ define([
         settings.value_add_code = selectedId;
         $("#PromoCode").removeClass("open");
         $("#choose-deal-text").text(text);
+        dataLayer.push({
+          'event': 'rootrez',
+          'eventCategory': 'Lodging Search Widget',
+          'eventAction': 'Offer Selected',
+          'eventLabel': selectedId
+        });
       });
+      offer='Offer Presented';
     } else {
       $("#PromoCode").removeClass("open");
     }
