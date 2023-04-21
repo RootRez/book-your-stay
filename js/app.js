@@ -6,7 +6,7 @@ define([
   "use strict";
 
   // private variables here...
-  var settings, $form, offer, dates;
+  var settings, $form, offer, dates, moment = require('moment');
 
   var app = {
     init: function (config) {
@@ -156,6 +156,7 @@ define([
 
   // event initialization
   function initializeEvents(settings) {
+    
     if (settings.title_text && settings.title_text.length) {
       $("#widget-title").text(settings.title_text);
       $("#widget-title-box").show();
@@ -172,49 +173,23 @@ define([
       $("#Checkout").val(settings.default_checkout);
     }
     
-    var today = new Date();
+    var today = moment();
+
+    if (settings.default_checkin !== "") {
+      var checkin_date = moment(settings.default_checkin);
+      $("#Checkin").val(checkin_date.format('MM/DD/YYYY'));
+      settings.default_checkin = checkin_date;
+    }
+
     if (settings.default_checkin !== "" && settings.default_checkout !== "") {
-
-      var checkin_date_raw = new Date(settings.default_checkin);
-      var checkout_date_raw = new Date(settings.default_checkout);
-
-      var checkin_date = composeDate( checkin_date_raw, 1, 1);
-      var checkin_date_mm_dd_yyyy = checkin_date[0] + '/' + checkin_date[1] + '/' + checkin_date[2];
-      $("#Checkin").val(checkin_date_mm_dd_yyyy);
-      settings.default_checkin = checkin_date_mm_dd_yyyy;
-
-      var checkout_date = composeDate( checkout_date_raw, 1, 1 );
-      var checkout_date_mm_dd_yyyy = checkout_date[0] + '/' + checkout_date[1] + '/' + checkout_date[2];
-      $("#Checkout").val(checkout_date_mm_dd_yyyy);
-      settings.default_checkout = checkout_date_mm_dd_yyyy;
-
-      var monthArr = [
-        "Jan",
-        "Feb",
-        "Mar",
-        "Apr",
-        "May",
-        "Jun",
-        "Jul",
-        "Aug",
-        "Sep",
-        "Oct",
-        "Nov",
-        "Dec",
-      ];
+      var checkout_date = moment(settings.default_checkout);
+      $("#Checkout").val(checkout_date.format('MM/DD/YYYY'));
+      settings.default_checkout = checkout_date;
 
       $("#rootrez_daterangepicker").html(
-        monthArr[checkin_date_raw.getMonth()] +
-        " " +
-        checkin_date_raw.getDate() +
-        ", " +
-        checkin_date_raw.getFullYear() +
-        " &rarr; " +
-        monthArr[checkout_date_raw.getMonth()] +
-        " " +
-        checkout_date_raw.getDate() +
-        ", " +
-        checkout_date_raw.getFullYear()
+        checkin_date.format('MMM DD, YYYY')
+         + " &rarr; " + 
+         checkout_date.format('MMM DD, YYYY')
       );
       
       if(settings.value_add_code == ""){
@@ -223,8 +198,8 @@ define([
           cache: false,
           url: settings.api_url + "/publisher/v3.0/discounts/grouped.json",
           data: {
-            checkin: checkin_date_mm_dd_yyyy,
-            checkout: checkout_date_mm_dd_yyyy,
+            checkin: checkin_date.format('MM/DD/YYYY'),
+            checkout: checkout_date.format('MM/DD/YYYY'),
             key: settings.publisher_key,
           },
           success: function (response) {
@@ -234,34 +209,23 @@ define([
       }
 
     } else {
-      var date = composeDate( today, 1, 1 );
-      var date_mm_dd_yyyy = date[0] + '/' + date[1] + '/' + date[2];
-      settings.default_checkin = date_mm_dd_yyyy;
-      settings.default_checkout = date_mm_dd_yyyy;
+      settings.default_checkin = today.format('MM/DD/YYYY');
+      settings.default_checkout = today.format('MM/DD/YYYY');
     }
 
-    var min_checkin_date_arr = [];
-    if (settings.min_checkin !== "") {
-      var min_checkin_date_raw = new Date(settings.min_checkin);
-      if ( min_checkin_date_raw < today) {
-        min_checkin_date_arr = composeDate( today, 1, 1);
-      } else {
-        min_checkin_date_arr = composeDate( min_checkin_date_raw, 1, 1);
-      }
+    var min_checkin_date = moment(settings.min_checkin);
+    min_checkin_date = min_checkin_date.isValid() ? min_checkin_date : today;
+    if ( min_checkin_date < today ) {
+      min_checkin_date = today;
     }
-    var min_checkin_mm_dd_yyyy = min_checkin_date_arr[0] + '/' + min_checkin_date_arr[1] + '/' + min_checkin_date_arr[2];
-    settings.min_checkin = min_checkin_mm_dd_yyyy;
+    settings.min_checkin = min_checkin_date.format('MM/DD/YYYY');
 
-    var max_checkout_date_raw = today, y=0;
-    if (settings.max_checkout !== "") {
-      max_checkout_date_raw = new Date(settings.max_checkout);
-    } else {
-      max_checkout_date_raw = today;
-      y = 2;
+    var max_checkout_date = moment(settings.max_checkout);
+    max_checkout_date = max_checkout_date.isValid() ? max_checkout_date : today;
+    if ( !(max_checkout_date > today) ) {
+      max_checkout_date.add(1, 'y');
     }
-    var max_checkout_date_arr = composeDate( max_checkout_date_raw, 1, 1, y);
-    var max_checkout_mm_dd_yyyy = max_checkout_date_arr[0] + '/' + max_checkout_date_arr[1] + '/' + max_checkout_date_arr[2];
-    settings.max_checkout = max_checkout_mm_dd_yyyy;
+    settings.max_checkout = max_checkout_date.format('MM/DD/YYYY');
 
     if(settings.locale == "fr-ca"){
         var dpSettings = {
@@ -324,7 +288,7 @@ define([
           "buttonClasses": ""
         };
     }
-	
+    
     $("#rootrez-widget-form #rootrez_daterangepicker").daterangepicker(
       dpSettings,
       function (start, end) {
@@ -332,7 +296,7 @@ define([
       	if(settings.locale == "fr-ca"){
       		dispFormat = "YYYY-MM-DD";
       	} else {
-      		dispFormat = "MMM D YYYY";
+      		dispFormat = "MMM D, YYYY";
       	}
         $("#rootrez_daterangepicker").html(
           start.format(dispFormat) + " &rarr; " + end.format(dispFormat)
@@ -391,15 +355,6 @@ define([
         "disabled"
       );
     }
-
-    // $('#rootrez-widget-form').on('apply.daterangepicker', function(ev, picker) {
-    //   dataLayer.push({
-    //     'event': 'rootrez',
-    //     'eventCategory': 'Lodging Search Widget',
-    //     'eventAction': 'Dates Selected',
-    //     'eventLabel': picker.startDate.format('YYYY-MM-DD') + ',' + picker.endDate.format('YYYY-MM-DD')
-    //   });
-    // });
 
     $("#rootrez-widget-form").on("submit", function (e) {
       e.preventDefault();
@@ -513,31 +468,6 @@ define([
       offer='Offer Presented';
     } else {
       $("#PromoCode").removeClass("open");
-    }
-  }
-
-  // 'rawDate' should be instance of Date
-  function composeDate( rawDate, addDay, addMonth, addYear) {
-    var tempDate = (rawDate instanceof Date) ? rawDate : false;
-    var addDay = (addDay) ? addDay : 0;
-    var addMonth = (addMonth) ? addMonth : 0;
-    var addYear = (addYear) ? addYear : 0;
-    if (tempDate) {
-      tempDate.setDate(tempDate.getDate() + addDay );
-      // console.log({ 'tempDate' : tempDate  })
-      var dd = tempDate.getDate();
-      var mm = tempDate.getMonth() + addMonth;
-      var yyyy = tempDate.getFullYear() + addYear;
-      if (dd < 10) {
-        dd = "0" + dd;
-      }
-
-      if (mm < 10) {
-        mm = "0" + mm;
-      }
-      return [mm,dd,yyyy];
-    } else {
-      return ['00','00','0000'];
     }
   }
 
