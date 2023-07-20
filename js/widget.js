@@ -17,6 +17,11 @@ require(["jquery", "js/app", "daterangepicker"], function($, app, daterangepicke
         api_url : $('script[id="rootrezScript"]').data("api_url"),
         value_add_code : $('script[id="rootrezScript"]').data("value_add_code"),
         locale : $('script[id="rootrezScript"]').data("locale"),
+        results_in_new_tab : $('script[id="rootrezScript"]').data("results_in_new_tab"),
+        features : $('script[id="rootrezScript"]').data("features"),
+        referrals : $('script[id="rootrezScript"]').data("referrals"),
+        prop_types : $('script[id="rootrezScript"]').data("prop_types"),
+        areas : $('script[id="rootrezScript"]').data("areas"),
      };
      $(function() {
         app.init(config);
