@@ -284,7 +284,7 @@ if(settings.locale == "fr-ca"){
       	if(settings.locale == "fr-ca"){
       		dispFormat = "YYYY-MM-DD";
       	} else{
-      		dispFormat = "MMM D YYYY";
+      		dispFormat = "MMM D";
       	}
         $("#rootrez_daterangepicker").html(
           start.format(dispFormat) + " &rarr; " + end.format(dispFormat)
