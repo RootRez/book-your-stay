@@ -295,9 +295,10 @@ define([
       	var dispFormat;
       	if(settings.locale == "fr-ca"){
       		dispFormat = "YYYY-MM-DD";
-      	} else {
-      		dispFormat = "MMM D, YYYY";
+      	} else{
+      		dispFormat = "MMM D";
       	}
+        
         $("#rootrez_daterangepicker").html(
           start.format(dispFormat) + " &rarr; " + end.format(dispFormat)
         );
