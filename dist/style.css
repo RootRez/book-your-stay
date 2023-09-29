@@ -74,7 +74,6 @@
 #rootrez-widget-form .search_dates {
   flex: 1 1 35%;
   border-right: 1px solid var(--border-color);
-  height: 60px;
   display: flex;
   flex-flow: row nowrap;
   justify-content: flex-start;
@@ -99,7 +98,6 @@
 #rootrez-widget-form .search_promo_code {
   flex: 0 1 25%;
   border-right: 1px solid var(--border-color);
-  height: 60px;
   padding: 16px;
   display: none;
   flex-flow: row nowrap;
@@ -123,7 +121,6 @@
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  height: 60px;
   width: 100%;
 }
 #rootrez-widget-form .search_promo_code svg {
@@ -206,7 +203,6 @@
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  height: 60px;
   width: 100%;
 }
 #rootrez-widget-form .search_occupancy h3.guest-total {
