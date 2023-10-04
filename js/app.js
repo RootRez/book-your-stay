@@ -187,9 +187,9 @@ define([
       settings.default_checkout = checkout_date;
 
       $("#rootrez_daterangepicker").html(
-        checkin_date.format('MMM DD, YYYY')
+        checkin_date.format('MMM DD')
          + " &rarr; " + 
-         checkout_date.format('MMM DD, YYYY')
+         checkout_date.format('MMM DD')
       );
       
       if(settings.value_add_code == ""){
