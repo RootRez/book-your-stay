@@ -78,90 +78,91 @@ define([
 
       if (!$("#RootRezWidget").find("#rootrez-widget-form").length) {
         $("#RootRezWidget").append(formHtml);
-      }
-      // get a reference of the form after is inserted
-      $form = $("#rootrez-widget-form");
-      // call initialization methods
-      initializeEvents(settings);
 
-      // Guest toggle
-      $(".search_occupancy-event").click(function () {
-        $(".search_occupancy").toggleClass("open");
-      });
+        // get a reference of the form after is inserted
+        $form = $("#rootrez-widget-form");
+        // call initialization methods
+        initializeEvents(settings);
 
-      $(".search_occupancy-counter .cancel").click(function () {
-        $(".search_occupancy").toggleClass("open");
-      });
-      // Promo Code toggle
-      $(".search_promo_code-event").click(function () {
-        $(".search_promo_code").toggleClass("open");
-      });
+        // Guest toggle
+        $(".search_occupancy-event").click(function () {
+          $(".search_occupancy").toggleClass("open");
+        });
 
-      $("#guestApply").click(function () {
-        $(".search_occupancy").toggleClass("open");
-      });
+        $(".search_occupancy-counter .cancel").click(function () {
+          $(".search_occupancy").toggleClass("open");
+        });
+        // Promo Code toggle
+        $(".search_promo_code-event").click(function () {
+          $(".search_promo_code").toggleClass("open");
+        });
 
-      if (settings.locale == "fr-ca") {
-        $("#guests_txt").text("Clients ");
-        $("#localeSearch").text("Rechercher");
-        $("#guestApply").text("Appliquer");
-        $("#guestCancel").text("Annuler");
-        $("#localeChildren").text("Enfants");
-        $("#localeAdults").text("Adultes");
-        $("#rootrez_daterangepicker").text("Arrivée → Départ");
-        $("#dealApply").text("Appliquer");
-        $("#dealCancel").text("Annuler");
-      }
+        $("#guestApply").click(function () {
+          $(".search_occupancy").toggleClass("open");
+        });
 
-      // Guest Counter
-      var $apbutton = $(".adults .p-btn");
-      var $ambutton = $(".adults .m-btn");
-      var $acounter = $(".adults .counter");
+        if (settings.locale == "fr-ca") {
+          $("#guests_txt").text("Clients ");
+          $("#localeSearch").text("Rechercher");
+          $("#guestApply").text("Appliquer");
+          $("#guestCancel").text("Annuler");
+          $("#localeChildren").text("Enfants");
+          $("#localeAdults").text("Adultes");
+          $("#rootrez_daterangepicker").text("Arrivée → Départ");
+          $("#dealApply").text("Appliquer");
+          $("#dealCancel").text("Annuler");
+        }
 
-      var $cpbutton = $(".children .p-btn");
-      var $cmbutton = $(".children .m-btn");
-      var $ccounter = $(".children .counter");
+        // Guest Counter
+        var $apbutton = $(".adults .p-btn");
+        var $ambutton = $(".adults .m-btn");
+        var $acounter = $(".adults .counter");
 
-      function guestTotals() {
-        var adults = $acounter.val();
-        var children = $ccounter.val();
-        var tot = parseInt(+adults + +children);
-        $(".guest-total span span").text(tot);
-        dataLayer.push({
-          event: "rootrez",
-          eventCategory: "Lodging Search Widget",
-          eventAction: "Occupancy Selected",
-          eventLabel: "Adults:" + adults + ",Children:" + children,
+        var $cpbutton = $(".children .p-btn");
+        var $cmbutton = $(".children .m-btn");
+        var $ccounter = $(".children .counter");
+
+        function guestTotals() {
+          var adults = $acounter.val();
+          var children = $ccounter.val();
+          var tot = parseInt(+adults + +children);
+          $(".guest-total span span").text(tot);
+          dataLayer.push({
+            event: "rootrez",
+            eventCategory: "Lodging Search Widget",
+            eventAction: "Occupancy Selected",
+            eventLabel: "Adults:" + adults + ",Children:" + children,
+          });
+        }
+
+        $apbutton.click(function () {
+          if ($acounter.val() <= 9) {
+            $acounter.val(parseInt($acounter.val()) + 1);
+            guestTotals();
+          }
+        });
+
+        $ambutton.click(function () {
+          if ($acounter.val() >= 2) {
+            $acounter.val(parseInt($acounter.val()) - 1);
+            guestTotals();
+          }
+        });
+
+        $cpbutton.click(function () {
+          if ($ccounter.val() <= 9) {
+            $ccounter.val(parseInt($ccounter.val()) + 1);
+            guestTotals();
+          }
+        });
+
+        $cmbutton.click(function () {
+          if ($ccounter.val() >= 1) {
+            $ccounter.val(parseInt($ccounter.val()) - 1);
+            guestTotals();
+          }
         });
       }
-
-      $apbutton.click(function () {
-        if ($acounter.val() <= 9) {
-          $acounter.val(parseInt($acounter.val()) + 1);
-          guestTotals();
-        }
-      });
-
-      $ambutton.click(function () {
-        if ($acounter.val() >= 2) {
-          $acounter.val(parseInt($acounter.val()) - 1);
-          guestTotals();
-        }
-      });
-
-      $cpbutton.click(function () {
-        if ($ccounter.val() <= 9) {
-          $ccounter.val(parseInt($ccounter.val()) + 1);
-          guestTotals();
-        }
-      });
-
-      $cmbutton.click(function () {
-        if ($ccounter.val() >= 1) {
-          $ccounter.val(parseInt($ccounter.val()) - 1);
-          guestTotals();
-        }
-      });
 
       // hide discount section until discounts found
       //$("#PromoCode").hide();
